@@ -18,11 +18,19 @@
     .header_logobox{
         display: flex;
         align-items: center;
+        cursor: pointer;
     }
     .header_title{
-        color: white;
+        color: #FFB6C1;
         font-size: 2.5rem;
         font-weight: bold;
+        margin: 0;
+        position: relative;
+        .header_title_inner{
+            position: absolute;
+            font-size: 13px;
+            color: #bcdded;
+        }
     }
     .header_icon{
         font-size:2.5rem;
@@ -48,22 +56,15 @@
     }
  `
  const Header = (props) => {
-    const {input,setInput,timeoutId,setTimeoutId,fetchData} = props;
-    const onChangInput = (e) =>{
-        clearTimeout(timeoutId);
-        setInput(e.target.value)
-        const timeout = setTimeout(() =>fetchData(e.target.value),1000);
-        setTimeoutId(timeout);
-    }
      return ( 
             <HeaderWrapper>
                 <div className="header_logobox">
                 <img className="header_logo" src={Logo} alt="logo"/>
-                <h1 className="header_title">Movie App</h1>
+                <h1 className="header_title">Home19<span className="header_title_inner">film</span></h1>
                 </div>
                 <div className='header_searchbox'>
                 <SearchOutlined className='header_icon'/>
-                <Input value={input} onChange={onChangInput} placeholder='Search Movie' className='input_search'/>
+                <Input placeholder='Search Movie' className='input_search'/>
                 </div>
             </HeaderWrapper>
       );

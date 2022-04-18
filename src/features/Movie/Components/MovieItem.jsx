@@ -1,13 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 const MovieItemContainer = styled.div`
+   .inneritem{
     display: flex;
     flex-direction: column;
-    width:280px;
-    box-shadow: 0 3px 10px 0 #aaa;
-    padding: 7px;
+    box-shadow: 0px 0px 4px 0 #aaaaaa94;;
     cursor: pointer;
+    padding: 10px;
     margin-top: 15px;
+    }
+
     .movie_item_img{
         height: 300px;
         object-fit: cover;
@@ -16,35 +18,42 @@ const MovieItemContainer = styled.div`
     .movie_item_title{
         font-size: 18px;
         font-weight: 600;
-        color: black;
+        color: #fff;
         margin: 15px 0;
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
+        margin-bottom: 5px;
     }
     .movie_item_info{
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
 
     }
     .movie_item_info span{
         font-size: 15px;
         font-weight: 400;
-        color: black;
+        color: #fff;
         text-transform: capitalize;
     }
+  
+
 `
 
-const MovieItem = ({movie,onSelectMovie}) => {
+const MovieItem = ({item,typemovie,onClick}) => {
 
     return (  
-        <MovieItemContainer onClick={()=>{onSelectMovie(movie.imdbID)}}>
-            <img className='movie_item_img' src={movie.Poster} alt='poster'/>
-            <h4 className='movie_item_title'>{movie.Title}</h4>
+        <MovieItemContainer  
+        onClick={()=>{onClick(item)}}
+        className='col c-12 m-6 lm-4 l-3'>
+           <li className='inneritem'>
+           <img className='movie_item_img' src={item.imageUrl} alt='poster'/>
+            <h4 className='movie_item_title'>{item.title}</h4>
             <div className='movie_item_info'>
-                <span>Year: {movie.Year}</span>
-                <span>Type: {movie.Type}</span>
+                <span>Loại Phim: {typemovie}</span>
+                <span>Thể Loại: {item.category}</span>
             </div>
+           </li>
         </MovieItemContainer>
     );
 }

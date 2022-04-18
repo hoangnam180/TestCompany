@@ -47,24 +47,24 @@ const DetaiPageContainer = styled.div`
         padding: 5px;
     }
 `
-const DetaiPage = ({movieInfo,onClose}) => {
+const DetaiPage = () => {
     
     return (  
         <DetaiPageContainer>
-            <img className='movie_item_img' src={movieInfo.Poster} alt='poster'/>
+            <img className='movie_item_img' src='' alt='poster'/>
             <div className='about'>
-                <h4 className='movie_item_title'>{movieInfo.Type} : {movieInfo.Title}</h4>
-                <span className='movie_item_info'>IMDB Rating:<span>{movieInfo?.imdbRating}</span></span>
-                <span className='movie_item_info'>Year:<span>{movieInfo?.Year}</span></span>
-                <span className='movie_item_info'>Language:<span>{movieInfo.Language}</span></span>
-                <span className='movie_item_info'>Rated:<span>{movieInfo?.Rated}</span></span>
-                <span className='movie_item_info'>Released:<span>{movieInfo?.Released}</span></span>
-                <span className='movie_item_info'>Runtime:<span>{movieInfo?.Runtime}</span></span>
-                <span className='movie_item_info'>Director:<span>{movieInfo?.Director}</span></span>
-                <span className='movie_item_info'>Actors:<span>{movieInfo?.Actors}</span></span>
-                <span className='movie_item_info'>Plot:<span>{movieInfo?.Plot}</span></span>
+                <h4 className='movie_item_title'>Tit</h4>
+                <span className='movie_item_info'>IMDB Rating:</span>
+                <span className='movie_item_info'>Year:<span></span></span>
+                <span className='movie_item_info'>Language:<span></span></span>
+                <span className='movie_item_info'>Rated:<span></span></span>
+                <span className='movie_item_info'>Released:<span></span></span>
+                <span className='movie_item_info'>Runtime:<span></span></span>
+                <span className='movie_item_info'>Director:<span></span></span>
+                <span className='movie_item_info'>Actors:<span></span></span>
+                <span className='movie_item_info'>Plot:<span></span></span>
             </div>
-            <div onClick={()=>{onClose()}} className='close'>X</div>
+            <div className='close'>X</div>
         </DetaiPageContainer>
     );
 }
