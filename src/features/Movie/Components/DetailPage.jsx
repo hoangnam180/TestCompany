@@ -1,72 +1,54 @@
-import React from 'react';
-import styled from 'styled-components';
+/** @format */
+
+import React, { useContext } from "react";
+import styled from "styled-components";
+import PlayButton from "../../../Components/playbutton/playbutton";
+import { UserContext } from "../../../context/itemmovie-context";
+import Iframe from "react-iframe";
 
 const DetaiPageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  min-height: 75vh;
+  .video {
+    margin-top: 30px;
+    text-align: center;
+  }
+  .title {
+    color: white;
+  }
+  .wrap-title {
     display: flex;
-    padding: 20px 30px;
-    border-bottom: 1px solid lightgrey;
-    .movie_item_img{
-        height: 350px;
-        object-fit: cover;
-        overflow: hidden;
-        width: 350px;
-    }
-    .about{
-        display: flex;
-        flex-direction: column;
-        margin: 20px;
-    }
-    .movie_item_title{
-        font-size: 18px;
-        font-weight: 600;
-        color: black;
-        margin: 15px 0;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        text-transform: capitalize;
-    }
-    .movie_item_info{
-        display: flex;
-    }
-    .movie_item_info span{
-        font-size: 15px;
-        font-weight: 400;
-        color: black;
-        text-transform: capitalize;
-        text-overflow: ellipsis;
-        &{
-            opacity: 0.5;
-            margin-left: 5px;
-        }
-    }
-    .close{
-        font-size: 18px;
-        font-weight: 400;
-        cursor: pointer;
-        padding: 5px;
-    }
-`
+    justify-content: center;
+  }
+`;
 const DetaiPage = () => {
-    
-    return (  
-        <DetaiPageContainer>
-            <img className='movie_item_img' src='' alt='poster'/>
-            <div className='about'>
-                <h4 className='movie_item_title'>Tit</h4>
-                <span className='movie_item_info'>IMDB Rating:</span>
-                <span className='movie_item_info'>Year:<span></span></span>
-                <span className='movie_item_info'>Language:<span></span></span>
-                <span className='movie_item_info'>Rated:<span></span></span>
-                <span className='movie_item_info'>Released:<span></span></span>
-                <span className='movie_item_info'>Runtime:<span></span></span>
-                <span className='movie_item_info'>Director:<span></span></span>
-                <span className='movie_item_info'>Actors:<span></span></span>
-                <span className='movie_item_info'>Plot:<span></span></span>
-            </div>
-            <div className='close'>X</div>
-        </DetaiPageContainer>
-    );
-}
- 
+  const { movie } = useContext(UserContext);
+  console.log(movie);
+  return (
+    <DetaiPageContainer>
+      <div className='video'>
+        <Iframe
+          url={movie.episode[0].url}
+          height='400px'
+          width='710px'
+          className='myClassname'
+          display='initial'
+          frameBorder='0'
+          // position='relative'
+          allow='fullscreen'
+          allowFullScreen='true'
+        />
+        <div className='wrap-title'>
+          <h1 className='title'>{movie.category} : </h1>
+          <h1 className='title'> {movie.title}</h1>
+        </div>
+      </div>
+    </DetaiPageContainer>
+  );
+};
+
 export default DetaiPage;
