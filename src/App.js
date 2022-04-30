@@ -5,15 +5,15 @@ import Header from "./Components/header/Header";
 import HomePage from "./features/Movie/Page/Home";
 import DetailPage from "./features/Movie/Components/DetailPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Spin } from "antd";
-import WrapperProvider from "./context/itemmovie-context";
 import Footer from "./Components/footer/Footer";
 import SeriesMovie from "./features/Movie/Page/SeriesMovie/SeriesMovie";
 import MovieTheaters from "./features/Movie/Page/MovieTheaters/MovieTheaters";
 import Cartoon from "./features/Movie/Page/Cartoon/Cartoon";
 import OddMovie from "./features/Movie/Page/OddMovie/OddMovie";
+import { UserContext } from "./context/itemmovie-context";
 function App() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState();
@@ -25,6 +25,7 @@ function App() {
         );
         const { data } = await respon;
         setData(data);
+        console.log("renderapp");
       } catch (error) {
         console.log("Fail to get products", error);
       }
@@ -33,7 +34,6 @@ function App() {
   }, []);
   return (
     <BrowserRouter>
-      <WrapperProvider>
         <div className='App'>
           <Header />
           {loading ? (
@@ -55,7 +55,6 @@ function App() {
           )}
           <Footer />
         </div>
-      </WrapperProvider>
     </BrowserRouter>
   );
 }

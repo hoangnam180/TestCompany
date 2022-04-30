@@ -88,7 +88,6 @@ const Menu = styled.div`
 
 const Header = props => {
   let navigate = useNavigate();
-
   const arrNav = [
     {
       path: "/phimbo",
@@ -107,7 +106,9 @@ const Header = props => {
       name: "Phim lẻ",
     },
   ];
-  const handleClick = (id, item) => {};
+  const handleClick = (id, item) => {
+    
+  };
   return (
     <>
       <HeaderWrapper>
@@ -130,10 +131,9 @@ const Header = props => {
         <ul className='navigation'>
           {arrNav.map((item, index) => {
             return (
-              <li>
+              <li key={index}>
                 <NavLink
                   to={item.path}
-                  key={index}
                   onClick={() => handleClick(index, item)}
                   className={`navigation_link`}>
                   {item.name}
