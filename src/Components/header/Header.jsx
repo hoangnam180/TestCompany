@@ -5,6 +5,8 @@ import { SearchOutlined } from "@ant-design/icons";
 import { Input } from "antd";
 import Logo from "../../Assets/logo/popcorn.png";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../../context/itemmovie-context";
 const HeaderWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -88,6 +90,7 @@ const Menu = styled.div`
 
 const Header = props => {
   let navigate = useNavigate();
+  const {setType} = useContext(UserContext);
   const arrNav = [
     {
       path: "/phimbo",
@@ -107,7 +110,7 @@ const Header = props => {
     },
   ];
   const handleClick = (id, item) => {
-    
+      setType(item.path)
   };
   return (
     <>

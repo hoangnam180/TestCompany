@@ -17,7 +17,10 @@ import { UserContext } from "./context/itemmovie-context";
 function App() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState();
+  const {type} = useContext(UserContext);
   useEffect(() => {
+    setData(null);
+    setLoading(true);
     (async () => {
       try {
         const respon = await axios.get(
@@ -31,7 +34,7 @@ function App() {
       }
       setLoading(false);
     })();
-  }, []);
+  }, [type]);
   return (
     <BrowserRouter>
         <div className='App'>
