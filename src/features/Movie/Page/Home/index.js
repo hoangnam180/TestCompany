@@ -7,6 +7,7 @@ import styled from "styled-components";
 import MovieItem from "../../Components/MovieItem";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../../context/itemmovie-context";
+
 const MovieListContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -90,14 +91,14 @@ const HomePage = ({ data }) => {
                   return (
                     index >= current.minIndex &&
                     index < current.maxIndex && (
-                      <MovieItem
-                        onClick={handleClickItem}
-                        key={index}
-                        id={index}
-                        keyid={key}
-                        item={item}
-                        typemovie={title}
-                      />
+                        <MovieItem
+                          onClick={handleClickItem}
+                          key={index}
+                          id={index}
+                          keyid={key}
+                          item={item}
+                          typemovie={title}
+                        />
                     )
                   );
                 })}

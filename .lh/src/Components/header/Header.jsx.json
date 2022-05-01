@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 6,
             "patches": [
                 {
                     "date": 1651322569731,
@@ -16,6 +16,22 @@
                 {
                     "date": 1651322619699,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -109,9 +109,9 @@\n       name: \"Phim lẻ\",\n     },\n   ];\n   const handleClick = (id, item) => {\n-\n+      setType(item.path)\n   };\n   return (\n     <>\n       <HeaderWrapper>\n"
+                },
+                {
+                    "date": 1651361730135,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -89,9 +89,8 @@\n `;\n \n const Header = props => {\n   let navigate = useNavigate();\n-  const {setType} = useContext(UserContext);\n   const arrNav = [\n     {\n       path: \"/phimbo\",\n       name: \"Phim bộ\",\n"
+                },
+                {
+                    "date": 1651361735791,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -108,9 +108,8 @@\n       name: \"Phim lẻ\",\n     },\n   ];\n   const handleClick = (id, item) => {\n-      setType(item.path)\n   };\n   return (\n     <>\n       <HeaderWrapper>\n"
+                },
+                {
+                    "date": 1651361743342,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,10 +4,8 @@\n import { SearchOutlined } from \"@ant-design/icons\";\n import { Input } from \"antd\";\n import Logo from \"../../Assets/logo/popcorn.png\";\n import { NavLink, useNavigate } from \"react-router-dom\";\n-import { useContext } from \"react\";\n-import { UserContext } from \"../../context/itemmovie-context\";\n const HeaderWrapper = styled.div`\n   display: flex;\n   align-items: center;\n   background-color: black;\n"
+                },
+                {
+                    "date": 1651361811124,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,10 @@\n import { SearchOutlined } from \"@ant-design/icons\";\n import { Input } from \"antd\";\n import Logo from \"../../Assets/logo/popcorn.png\";\n import { NavLink, useNavigate } from \"react-router-dom\";\n+import { useContext } from \"react\";\n+import { UserContext } from \"../../context/itemmovie-context\";\n const HeaderWrapper = styled.div`\n   display: flex;\n   align-items: center;\n   background-color: black;\n@@ -87,8 +89,9 @@\n `;\n \n const Header = props => {\n   let navigate = useNavigate();\n+  const {setType} = useContext(UserContext);\n   const arrNav = [\n     {\n       path: \"/phimbo\",\n       name: \"Phim bộ\",\n@@ -106,8 +109,9 @@\n       name: \"Phim lẻ\",\n     },\n   ];\n   const handleClick = (id, item) => {\n+      setType(item.path)\n   };\n   return (\n     <>\n       <HeaderWrapper>\n"
                 }
             ],
             "date": 1651322569730,

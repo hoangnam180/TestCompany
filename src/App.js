@@ -17,9 +17,8 @@ import { UserContext } from "./context/itemmovie-context";
 function App() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState();
-  const {type} = useContext(UserContext);
+  const { type } = useContext(UserContext);
   useEffect(() => {
-    setData(null);
     setLoading(true);
     (async () => {
       try {
@@ -28,7 +27,7 @@ function App() {
         );
         const { data } = await respon;
         setData(data);
-        console.log("renderapp");
+        console.log("renderapp",data);
       } catch (error) {
         console.log("Fail to get products", error);
       }
@@ -37,27 +36,27 @@ function App() {
   }, [type]);
   return (
     <BrowserRouter>
-        <div className='App'>
-          <Header />
-          {loading ? (
-            <div className='example'>
-              <Spin />
-            </div>
-          ) : (
-            <Routes>
-              <Route path='/' element={<HomePage data={data} />} />
-              <Route path='/detail/*' element={<DetailPage />} />
-              <Route path='/phimbo/*' element={<SeriesMovie data={data} />} />
-              <Route
-                path='/phimchieurap/*'
-                element={<MovieTheaters data={data} />}
-              />
-              <Route path='/phimhoathinh/*' element={<Cartoon data={data} />} />
-              <Route path='/phimle/*' element={<OddMovie data={data} />} />
-            </Routes>
-          )}
-          <Footer />
-        </div>
+      <div className='App'>
+        <Header />
+        {loading ? (
+          <div className='example'>
+            <Spin />
+          </div>
+        ) : (
+          <Routes>
+            <Route path='/' element={<HomePage data={data} />} />
+            <Route path='/detail/*' element={<DetailPage />} />
+            <Route path='/phimbo/*' element={<SeriesMovie data={data} />} />
+            <Route
+              path='/phimchieurap/*'
+              element={<MovieTheaters data={data} />}
+            />
+            <Route path='/phimhoathinh/*' element={<Cartoon data={data} />} />
+            <Route path='/phimle/*' element={<OddMovie data={data} />} />
+          </Routes>
+        )}
+        <Footer />
+      </div>
     </BrowserRouter>
   );
 }
