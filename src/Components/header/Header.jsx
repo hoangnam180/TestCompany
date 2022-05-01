@@ -93,6 +93,10 @@ const Header = props => {
   const {setType} = useContext(UserContext);
   const arrNav = [
     {
+      path:"/",
+      name:"Trang chủ"
+    },
+    {
       path: "/phimbo",
       name: "Phim bộ",
     },

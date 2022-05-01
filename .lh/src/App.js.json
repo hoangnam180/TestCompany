@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 10,
+            "activePatchIndex": 12,
             "patches": [
                 {
                     "date": 1651322387145,
@@ -48,6 +48,14 @@
                 {
                     "date": 1651362086315,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n           \"https://api.apify.com/v2/key-value-stores/QubTry45OOCkTyohU/records/LATEST?fbclid=IwAR0nJYHjOqJY60a9OJKatwQ8iBP9p6zyTPB9-mfjyLSa5TJGbalHhODluXw\",\n         );\n         const { data } = await respon;\n         setData(data);\n-        console.log(\"renderapp\");\n+        console.log(\"renderapp\",data);\n       } catch (error) {\n         console.log(\"Fail to get products\", error);\n       }\n       setLoading(false);\n"
+                },
+                {
+                    "date": 1651370395937,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n /** @format */\n \n-import \"./App.css\";\n+// import \"./App.css\";\n import Header from \"./Components/header/Header\";\n import HomePage from \"./features/Movie/Page/Home\";\n import DetailPage from \"./features/Movie/Components/DetailPage\";\n import { BrowserRouter, Routes, Route } from \"react-router-dom\";\n"
+                },
+                {
+                    "date": 1651370415320,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n /** @format */\n \n-// import \"./App.css\";\n+import \"./App.css\";\n import Header from \"./Components/header/Header\";\n import HomePage from \"./features/Movie/Page/Home\";\n import DetailPage from \"./features/Movie/Components/DetailPage\";\n import { BrowserRouter, Routes, Route } from \"react-router-dom\";\n"
                 }
             ],
             "date": 1651322387145,

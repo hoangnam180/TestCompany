@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/features/Movie/Page/SeriesMovie/SeriesMovie.jsx",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1651376975302,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1651376975302,
+            "name": "Commit-0",
+            "content": "/** @format */\nimport { Pagination } from \"antd\";\nimport React, { useContext, useState } from \"react\";\nimport { useNavigate } from \"react-router-dom\";\nimport styled from \"styled-components\";\nimport { UserContext } from \"../../../../context/itemmovie-context\";\nimport MovieItem from \"../../Components/MovieItem\";\nconst MovieListContainer = styled.div`\n  display: flex;\n  flex-wrap: wrap;\n  padding: 0 20px;\n`;\nconst Container = styled.div`\n  max-width: 1300px;\n  margin: 0 auto;\n`;\nconst SeriesMovie = data => {\n  const {setMovie } = useContext(UserContext);\n  const navigate = useNavigate()\n  const handleClickItem = (id, keyid) => {\n    setMovie(data.data.phim.phimbo[id]);\n    navigate(\"/detail\");\n  };\n  const pageSize = 28;\n  const [current, setCurrent] = useState({\n    minIndex: 0,\n    maxIndex: pageSize,\n    current: 1,\n  });\n  const onChange = page => {\n    setCurrent(prev => {\n      return {\n        ...prev,\n        current: page,\n        minIndex: (page - 1) * pageSize,\n        maxIndex: page * pageSize,\n      };\n    });\n  };\n  return (\n    <Container>\n    <MovieListContainer className='row'>\n      {data &&\n        data.data &&\n        data.data.phim.phimbo.map((item, index) => {\n          return (\n            index >= current.minIndex &&\n            index < current.maxIndex && (\n            <MovieItem\n              onClick={handleClickItem}\n              key={index}\n              id={index}\n              item={item}\n              typemovie={\"Phim bộ\"}\n            />\n            )\n          );\n        })}\n    </MovieListContainer>\n    <Pagination\n        pageSize={pageSize}\n        current={current.current}\n        total={data.data.phim.phimbo.length}\n        onChange={onChange}\n        showSizeChanger={false}\n        size={\"big\"}\n        style={{ textAlign: \"right\", marginRight: \"5%\", marginTop: \"15px\" }}\n      />\n    </Container>\n  );\n};\n\nexport default SeriesMovie;\n"
+        }
+    ]
+}

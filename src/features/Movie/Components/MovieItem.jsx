@@ -39,13 +39,13 @@ const MovieItemContainer = styled.div`
   }
 `;
 
-const MovieItem = ({ item, typemovie, onClick, id, keyid }) => {
+const MovieItem = ({ item, typemovie, onClick, id, keyid ,slide}) => {
   return (
     <MovieItemContainer
       onClick={() => {
         onClick(id, keyid);
       }}
-      className='col c-12 m-4 lm-3 l-2-4'>
+      className={slide ? 'col c-12 m-12 lm-12 l-2-12' : 'col c-12 m-4 lm-3 l-2-4'}>
       <li className='inneritem'>
         <img className='movie_item_img' src={item.imageUrl} alt='poster' />
         <h4 className='movie_item_title'>{item.title}</h4>
