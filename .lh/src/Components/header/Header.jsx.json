@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 7,
+            "activePatchIndex": 9,
             "patches": [
                 {
                     "date": 1651322569731,
@@ -36,6 +36,14 @@
                 {
                     "date": 1651371546802,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -92,8 +92,12 @@\n   let navigate = useNavigate();\n   const {setType} = useContext(UserContext);\n   const arrNav = [\n     {\n+      path:\"/\",\n+      name:\"Trang chủ\"\n+    },\n+    {\n       path: \"/phimbo\",\n       name: \"Phim bộ\",\n     },\n     {\n"
+                },
+                {
+                    "date": 1651452736809,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import styled from \"styled-components\";\n import { SearchOutlined } from \"@ant-design/icons\";\n import { Input } from \"antd\";\n import Logo from \"../../Assets/logo/popcorn.png\";\n-import { NavLink, useNavigate } from \"react-router-dom\";\n+import { NavLink, useNavigate,useLocation } from \"react-router-dom\";\n import { useContext } from \"react\";\n import { UserContext } from \"../../context/itemmovie-context\";\n const HeaderWrapper = styled.div`\n   display: flex;\n@@ -89,8 +89,10 @@\n `;\n \n const Header = props => {\n   let navigate = useNavigate();\n+  let location = useLocation();\n+  console.log(location);\n   const {setType} = useContext(UserContext);\n   const arrNav = [\n     {\n       path:\"/\",\n"
+                },
+                {
+                    "date": 1651452916488,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import styled from \"styled-components\";\n import { SearchOutlined } from \"@ant-design/icons\";\n import { Input } from \"antd\";\n import Logo from \"../../Assets/logo/popcorn.png\";\n-import { NavLink, useNavigate,useLocation } from \"react-router-dom\";\n+import { NavLink, useNavigate } from \"react-router-dom\";\n import { useContext } from \"react\";\n import { UserContext } from \"../../context/itemmovie-context\";\n const HeaderWrapper = styled.div`\n   display: flex;\n@@ -89,10 +89,8 @@\n `;\n \n const Header = props => {\n   let navigate = useNavigate();\n-  let location = useLocation();\n-  console.log(location);\n   const {setType} = useContext(UserContext);\n   const arrNav = [\n     {\n       path:\"/\",\n"
                 }
             ],
             "date": 1651322569730,

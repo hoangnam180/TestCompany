@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 12,
+            "activePatchIndex": 23,
             "patches": [
                 {
                     "date": 1651322387145,
@@ -56,6 +56,50 @@
                 {
                     "date": 1651370415320,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n /** @format */\n \n-// import \"./App.css\";\n+import \"./App.css\";\n import Header from \"./Components/header/Header\";\n import HomePage from \"./features/Movie/Page/Home\";\n import DetailPage from \"./features/Movie/Components/DetailPage\";\n import { BrowserRouter, Routes, Route } from \"react-router-dom\";\n"
+                },
+                {
+                    "date": 1651452936076,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import \"./App.css\";\n import Header from \"./Components/header/Header\";\n import HomePage from \"./features/Movie/Page/Home\";\n import DetailPage from \"./features/Movie/Components/DetailPage\";\n-import { BrowserRouter, Routes, Route } from \"react-router-dom\";\n+import { BrowserRouter, Routes, Route,useLocation } from \"react-router-dom\";\n import { useContext, useEffect, useState } from \"react\";\n import axios from \"axios\";\n import { Spin } from \"antd\";\n import Footer from \"./Components/footer/Footer\";\n@@ -13,12 +13,14 @@\n import MovieTheaters from \"./features/Movie/Page/MovieTheaters/MovieTheaters\";\n import Cartoon from \"./features/Movie/Page/Cartoon/Cartoon\";\n import OddMovie from \"./features/Movie/Page/OddMovie/OddMovie\";\n import { UserContext } from \"./context/itemmovie-context\";\n+\n function App() {\n   const [loading, setLoading] = useState(true);\n   const [data, setData] = useState();\n-  const { type } = useContext(UserContext);\n+  const {type } = useContext(UserContext);\n+  let location = useLocation();\n   useEffect(() => {\n     setLoading(true);\n     (async () => {\n       try {\n"
+                },
+                {
+                    "date": 1651452948502,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,8 +19,9 @@\n   const [loading, setLoading] = useState(true);\n   const [data, setData] = useState();\n   const {type } = useContext(UserContext);\n   let location = useLocation();\n+  console.log(location);\n   useEffect(() => {\n     setLoading(true);\n     (async () => {\n       try {\n"
+                },
+                {
+                    "date": 1651452975964,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import \"./App.css\";\n import Header from \"./Components/header/Header\";\n import HomePage from \"./features/Movie/Page/Home\";\n import DetailPage from \"./features/Movie/Components/DetailPage\";\n-import { BrowserRouter, Routes, Route,useLocation } from \"react-router-dom\";\n+import { BrowserRouter, Routes, Route } from \"react-router-dom\";\n import { useContext, useEffect, useState } from \"react\";\n import axios from \"axios\";\n import { Spin } from \"antd\";\n import Footer from \"./Components/footer/Footer\";\n"
+                },
+                {
+                    "date": 1651452990964,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import \"./App.css\";\n import Header from \"./Components/header/Header\";\n import HomePage from \"./features/Movie/Page/Home\";\n import DetailPage from \"./features/Movie/Components/DetailPage\";\n-import { BrowserRouter, Routes, Route } from \"react-router-dom\";\n+import { BrowserRouter, Routes, Route,useLocation } from \"react-router-dom\";\n import { useContext, useEffect, useState } from \"react\";\n import axios from \"axios\";\n import { Spin } from \"antd\";\n import Footer from \"./Components/footer/Footer\";\n@@ -18,9 +18,9 @@\n function App() {\n   const [loading, setLoading] = useState(true);\n   const [data, setData] = useState();\n   const {type } = useContext(UserContext);\n-  let location = useLocation();\n+  // let location = useLocation();\n   console.log(location);\n   useEffect(() => {\n     setLoading(true);\n     (async () => {\n"
+                },
+                {
+                    "date": 1651453016226,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,10 +18,10 @@\n function App() {\n   const [loading, setLoading] = useState(true);\n   const [data, setData] = useState();\n   const {type } = useContext(UserContext);\n-  // let location = useLocation();\n-  console.log(location);\n+  let location = useLocation();\n+  // console.log(location);\n   useEffect(() => {\n     setLoading(true);\n     (async () => {\n       try {\n"
+                },
+                {
+                    "date": 1651453047607,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,8 @@\n       setLoading(false);\n     })();\n   }, [type]);\n   return (\n-    <BrowserRouter>\n       <div className='App'>\n         <Header />\n         {loading ? (\n           <div className='example'>\n@@ -59,9 +58,8 @@\n           </Routes>\n         )}\n         <Footer />\n       </div>\n-    </BrowserRouter>\n   );\n }\n \n export default App;\n"
+                },
+                {
+                    "date": 1651453090936,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import \"./App.css\";\n import Header from \"./Components/header/Header\";\n import HomePage from \"./features/Movie/Page/Home\";\n import DetailPage from \"./features/Movie/Components/DetailPage\";\n-import { BrowserRouter, Routes, Route,useLocation } from \"react-router-dom\";\n+import {Routes, Route,useLocation } from \"react-router-dom\";\n import { useContext, useEffect, useState } from \"react\";\n import axios from \"axios\";\n import { Spin } from \"antd\";\n import Footer from \"./Components/footer/Footer\";\n"
+                },
+                {
+                    "date": 1651453098736,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n   const [loading, setLoading] = useState(true);\n   const [data, setData] = useState();\n   const {type } = useContext(UserContext);\n   let location = useLocation();\n-  // console.log(location);\n+  console.log(location);\n   useEffect(() => {\n     setLoading(true);\n     (async () => {\n       try {\n"
+                },
+                {
+                    "date": 1651453147175,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,8 @@\n   const [loading, setLoading] = useState(true);\n   const [data, setData] = useState();\n   const {type } = useContext(UserContext);\n   let location = useLocation();\n-  console.log(location);\n   useEffect(() => {\n     setLoading(true);\n     (async () => {\n       try {\n@@ -35,9 +34,9 @@\n         console.log(\"Fail to get products\", error);\n       }\n       setLoading(false);\n     })();\n-  }, [type]);\n+  }, [type,location.pathname]);\n   return (\n       <div className='App'>\n         <Header />\n         {loading ? (\n"
+                },
+                {
+                    "date": 1651453210604,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,8 +19,9 @@\n   const [loading, setLoading] = useState(true);\n   const [data, setData] = useState();\n   const {type } = useContext(UserContext);\n   let location = useLocation();\n+  console.log(location);\n   useEffect(() => {\n     setLoading(true);\n     (async () => {\n       try {\n"
+                },
+                {
+                    "date": 1651453247832,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,8 @@\n   const [loading, setLoading] = useState(true);\n   const [data, setData] = useState();\n   const {type } = useContext(UserContext);\n   let location = useLocation();\n-  console.log(location);\n   useEffect(() => {\n     setLoading(true);\n     (async () => {\n       try {\n"
                 }
             ],
             "date": 1651322387145,

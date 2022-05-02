@@ -4,7 +4,7 @@ import "./App.css";
 import Header from "./Components/header/Header";
 import HomePage from "./features/Movie/Page/Home";
 import DetailPage from "./features/Movie/Components/DetailPage";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {Routes, Route,useLocation } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Spin } from "antd";
@@ -14,10 +14,12 @@ import MovieTheaters from "./features/Movie/Page/MovieTheaters/MovieTheaters";
 import Cartoon from "./features/Movie/Page/Cartoon/Cartoon";
 import OddMovie from "./features/Movie/Page/OddMovie/OddMovie";
 import { UserContext } from "./context/itemmovie-context";
+
 function App() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState();
-  const { type } = useContext(UserContext);
+  const {type } = useContext(UserContext);
+  let location = useLocation();
   useEffect(() => {
     setLoading(true);
     (async () => {
@@ -33,9 +35,8 @@ function App() {
       }
       setLoading(false);
     })();
-  }, [type]);
+  }, [type,location.pathname]);
   return (
-    <BrowserRouter>
       <div className='App'>
         <Header />
         {loading ? (
@@ -57,7 +58,6 @@ function App() {
         )}
         <Footer />
       </div>
-    </BrowserRouter>
   );
 }
 
