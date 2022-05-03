@@ -6,12 +6,12 @@ function WrapperProvider({ children }) {
   let retrievedObject = localStorage.getItem("parentValueKey") || "{}";
   const [movie, setMovie] = useState(JSON.parse(retrievedObject));
   const [type,setType] = useState("TongHop");
-
+  const [inputSearch,setInputSearch] = useState("");
   useEffect(() => {
     localStorage.setItem("parentValueKey", JSON.stringify(movie));
-  }, [movie, setMovie]);
+  }, [movie]);
   return (
-    <UserContext.Provider value={{ movie, setMovie,type,setType }}>
+    <UserContext.Provider value={{ movie, setMovie,type,setType,inputSearch,setInputSearch }}>
       {children}
     </UserContext.Provider>
   );

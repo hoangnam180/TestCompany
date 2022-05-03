@@ -16,15 +16,33 @@ const Container = styled.div`
   max-width: 1300px;
   margin: 0 auto;
 `;
-const SeriesMovie = data => {
-  const { setMovie } = useContext(UserContext);
+const Search = data => {
+  const { setMovie, inputSearch } = useContext(UserContext);
   const navigate = useNavigate();
 
-  const handleClickItem = (id, keyid) => {
-    setMovie(data.data.phim.phimbo[id]);
+  const merge = () => {
+    let datatemp = [];
+    for (let property in data?.data?.phim) {
+      datatemp.push(...data?.data?.phim[property]);
+    }
+    return datatemp;
+  };
+  const merged = merge();
+  const filterData =
+    merged &&
+    merged.filter(item => {
+      if (inputSearch === "") {
+        return item;
+      } else {
+        return item.title.toLowerCase().includes(inputSearch);
+      }
+    });
+
+  const handleClickItem = id => {
+    setMovie(filterData[id]);
     navigate("/detail");
   };
-  const pageSize = 30;
+  const pageSize = window.innerWidth < 1200 ? 28 : 30;
   const [current, setCurrent] = useState({
     minIndex: 0,
     maxIndex: pageSize,
@@ -43,10 +61,8 @@ const SeriesMovie = data => {
   return (
     <Container>
       <MovieListContainer className='row'>
-        {data && data.data && data.data.phim.phimbo.length > 0 ? (
-          data &&
-          data.data &&
-          data.data.phim.phimbo.map((item, index) => {
+        {filterData.length > 0 ? (
+          filterData.map((item, index) => {
             return (
               index >= current.minIndex &&
               index < current.maxIndex && (
@@ -67,7 +83,7 @@ const SeriesMovie = data => {
       <Pagination
         pageSize={pageSize}
         current={current.current}
-        total={data && data.data && data.data.phim.phimbo.length}
+        total={filterData.length}
         onChange={onChange}
         showSizeChanger={false}
         size={"big"}
@@ -77,4 +93,4 @@ const SeriesMovie = data => {
   );
 };
 
-export default SeriesMovie;
+export default Search;

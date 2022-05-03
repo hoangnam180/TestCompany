@@ -3,11 +3,199 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 47,
             "patches": [
                 {
                     "date": 1651376975302,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1651504710876,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n   max-width: 1300px;\n   margin: 0 auto;\n `;\n const SeriesMovie = data => {\n-  const {setMovie } = useContext(UserContext);\n+  const {setMovie ,inputSearch} = useContext(UserContext);\n   const navigate = useNavigate()\n   const handleClickItem = (id, keyid) => {\n     setMovie(data.data.phim.phimbo[id]);\n     navigate(\"/detail\");\n"
+                },
+                {
+                    "date": 1651505121706,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,8 +16,10 @@\n `;\n const SeriesMovie = data => {\n   const {setMovie ,inputSearch} = useContext(UserContext);\n   const navigate = useNavigate()\n+  const filterData = data && data.data && data.data.phim.phimbo;\n+  console.log(filterData);\n   const handleClickItem = (id, keyid) => {\n     setMovie(data.data.phim.phimbo[id]);\n     navigate(\"/detail\");\n   };\n"
+                },
+                {
+                    "date": 1651505262679,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,15 @@\n `;\n const SeriesMovie = data => {\n   const {setMovie ,inputSearch} = useContext(UserContext);\n   const navigate = useNavigate()\n-  const filterData = data && data.data && data.data.phim.phimbo;\n+  const filterData = data && data.data && data.data.phim.phimbo.filter(item=>{\n+      if(inputSearch === \"\"){\n+        return item;\n+      }else {\n+        return item.text.toLowerCase().includes(inputSearch);\n+      }\n+  });\n   console.log(filterData);\n   const handleClickItem = (id, keyid) => {\n     setMovie(data.data.phim.phimbo[id]);\n     navigate(\"/detail\");\n"
+                },
+                {
+                    "date": 1651505277172,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n       }else {\n         return item.text.toLowerCase().includes(inputSearch);\n       }\n   });\n-  console.log(filterData);\n+  // console.log(filterData);\n   const handleClickItem = (id, keyid) => {\n     setMovie(data.data.phim.phimbo[id]);\n     navigate(\"/detail\");\n   };\n"
+                },
+                {
+                    "date": 1651505285035,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n       }else {\n         return item.text.toLowerCase().includes(inputSearch);\n       }\n   });\n-  // console.log(filterData);\n+  console.log(filterData);\n   const handleClickItem = (id, keyid) => {\n     setMovie(data.data.phim.phimbo[id]);\n     navigate(\"/detail\");\n   };\n"
+                },
+                {
+                    "date": 1651505353112,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n   const filterData = data && data.data && data.data.phim.phimbo.filter(item=>{\n       if(inputSearch === \"\"){\n         return item;\n       }else {\n-        return item.text.toLowerCase().includes(inputSearch);\n+        return item.toLowerCase().includes(inputSearch);\n       }\n   });\n   console.log(filterData);\n   const handleClickItem = (id, keyid) => {\n"
+                },
+                {
+                    "date": 1651505388620,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n   const filterData = data && data.data && data.data.phim.phimbo.filter(item=>{\n       if(inputSearch === \"\"){\n         return item;\n       }else {\n-        return item.toLowerCase().includes(inputSearch);\n+        return item.title.toLowerCase().includes(inputSearch);\n       }\n   });\n   console.log(filterData);\n   const handleClickItem = (id, keyid) => {\n"
+                },
+                {
+                    "date": 1651505543730,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,8 @@\n       }else {\n         return item.title.toLowerCase().includes(inputSearch);\n       }\n   });\n-  console.log(filterData);\n   const handleClickItem = (id, keyid) => {\n     setMovie(data.data.phim.phimbo[id]);\n     navigate(\"/detail\");\n   };\n@@ -47,11 +46,9 @@\n   };\n   return (\n     <Container>\n     <MovieListContainer className='row'>\n-      {data &&\n-        data.data &&\n-        data.data.phim.phimbo.map((item, index) => {\n+      {filterData.map((item, index) => {\n           return (\n             index >= current.minIndex &&\n             index < current.maxIndex && (\n             <MovieItem\n"
+                },
+                {
+                    "date": 1651506726768,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n /** @format */\n import { Pagination } from \"antd\";\n-import React, { useContext, useState } from \"react\";\n+import React, { useContext, useState, useTransition } from \"react\";\n import { useNavigate } from \"react-router-dom\";\n import styled from \"styled-components\";\n import { UserContext } from \"../../../../context/itemmovie-context\";\n import MovieItem from \"../../Components/MovieItem\";\n@@ -16,15 +16,23 @@\n `;\n const SeriesMovie = data => {\n   const {setMovie ,inputSearch} = useContext(UserContext);\n   const navigate = useNavigate()\n-  const filterData = data && data.data && data.data.phim.phimbo.filter(item=>{\n+  const defaultData = data && data.data && data.data.phim.phimbo;\n+  const [filterDatas,setFilterData] = useState(defaultData);\n+\n+  \n+  const handleClick = ()=>{\n+    const result = filterDatas.filter(item=>{\n       if(inputSearch === \"\"){\n         return item;\n       }else {\n         return item.title.toLowerCase().includes(inputSearch);\n       }\n   });\n+    setFilterData(result);\n+  }\n+\n   const handleClickItem = (id, keyid) => {\n     setMovie(data.data.phim.phimbo[id]);\n     navigate(\"/detail\");\n   };\n"
+                },
+                {
+                    "date": 1651506743742,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,9 +54,9 @@\n   };\n   return (\n     <Container>\n     <MovieListContainer className='row'>\n-      {filterData.map((item, index) => {\n+      {filterDatas.map((item, index) => {\n           return (\n             index >= current.minIndex &&\n             index < current.maxIndex && (\n             <MovieItem\n"
+                },
+                {
+                    "date": 1651506810502,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,10 @@\n       }else {\n         return item.title.toLowerCase().includes(inputSearch);\n       }\n   });\n-    setFilterData(result);\n+  console.log(result);\n+    // setFilterData(result);\n   }\n \n   const handleClickItem = (id, keyid) => {\n     setMovie(data.data.phim.phimbo[id]);\n"
+                },
+                {
+                    "date": 1651506992561,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,23 +16,15 @@\n `;\n const SeriesMovie = data => {\n   const {setMovie ,inputSearch} = useContext(UserContext);\n   const navigate = useNavigate()\n-  const defaultData = data && data.data && data.data.phim.phimbo;\n-  const [filterDatas,setFilterData] = useState(defaultData);\n-\n-  \n-  const handleClick = ()=>{\n-    const result = filterDatas.filter(item=>{\n+  const filterData = data && data.data && data.data.phim.phimbo.filter(item=>{\n       if(inputSearch === \"\"){\n         return item;\n       }else {\n         return item.title.toLowerCase().includes(inputSearch);\n       }\n   });\n-  console.log(result);\n-    // setFilterData(result);\n-  }\n \n   const handleClickItem = (id, keyid) => {\n     setMovie(data.data.phim.phimbo[id]);\n     navigate(\"/detail\");\n@@ -55,9 +47,9 @@\n   };\n   return (\n     <Container>\n     <MovieListContainer className='row'>\n-      {filterDatas.map((item, index) => {\n+      {filterData.map((item, index) => {\n           return (\n             index >= current.minIndex &&\n             index < current.maxIndex && (\n             <MovieItem\n"
+                },
+                {
+                    "date": 1651507106936,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,9 @@\n const MovieListContainer = styled.div`\n   display: flex;\n   flex-wrap: wrap;\n   padding: 0 20px;\n+  min-height: 100vh;\n `;\n const Container = styled.div`\n   max-width: 1300px;\n   margin: 0 auto;\n"
+                },
+                {
+                    "date": 1651507208012,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n /** @format */\n-import { Pagination } from \"antd\";\n+import { Empty, Pagination } from \"antd\";\n import React, { useContext, useState, useTransition } from \"react\";\n import { useNavigate } from \"react-router-dom\";\n import styled from \"styled-components\";\n import { UserContext } from \"../../../../context/itemmovie-context\";\n@@ -48,9 +48,9 @@\n   };\n   return (\n     <Container>\n     <MovieListContainer className='row'>\n-      {filterData.map((item, index) => {\n+      {filterData.length > 0 ? filterData.map((item, index) => {\n           return (\n             index >= current.minIndex &&\n             index < current.maxIndex && (\n             <MovieItem\n@@ -61,9 +61,9 @@\n               typemovie={\"Phim bộ\"}\n             />\n             )\n           );\n-        })}\n+        }) :  <Empty description={<span>Phim này hiện chưa có...!!</span>} />}\n     </MovieListContainer>\n     <Pagination\n         pageSize={pageSize}\n         current={current.current}\n"
+                },
+                {
+                    "date": 1651507223032,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,9 @@\n   display: flex;\n   flex-wrap: wrap;\n   padding: 0 20px;\n   min-height: 100vh;\n+  justify-content:center;\n `;\n const Container = styled.div`\n   max-width: 1300px;\n   margin: 0 auto;\n"
+                },
+                {
+                    "date": 1651507234052,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n const MovieListContainer = styled.div`\n   display: flex;\n   flex-wrap: wrap;\n   padding: 0 20px;\n-  min-height: 100vh;\n+  min-height: 50vh;\n   justify-content:center;\n `;\n const Container = styled.div`\n   max-width: 1300px;\n"
+                },
+                {
+                    "date": 1651581934168,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -67,9 +67,9 @@\n     </MovieListContainer>\n     <Pagination\n         pageSize={pageSize}\n         current={current.current}\n-        total={data.data.phim.phimbo.length}\n+        total={filterData.length}\n         onChange={onChange}\n         showSizeChanger={false}\n         size={\"big\"}\n         style={{ textAlign: \"right\", marginRight: \"5%\", marginTop: \"15px\" }}\n"
+                },
+                {
+                    "date": 1651582049546,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n   const handleClickItem = (id, keyid) => {\n     setMovie(data.data.phim.phimbo[id]);\n     navigate(\"/detail\");\n   };\n-  const pageSize = 28;\n+  const pageSize = 30;\n   const [current, setCurrent] = useState({\n     minIndex: 0,\n     maxIndex: pageSize,\n     current: 1,\n"
+                },
+                {
+                    "date": 1651584443988,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,8 +18,9 @@\n `;\n const SeriesMovie = data => {\n   const {setMovie ,inputSearch} = useContext(UserContext);\n   const navigate = useNavigate()\n+  console.log(data);\n   const filterData = data && data.data && data.data.phim.phimbo.filter(item=>{\n       if(inputSearch === \"\"){\n         return item;\n       }else {\n"
+                },
+                {
+                    "date": 1651584454710,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n `;\n const SeriesMovie = data => {\n   const {setMovie ,inputSearch} = useContext(UserContext);\n   const navigate = useNavigate()\n-  console.log(data);\n+  console.log(data.phịm);\n   const filterData = data && data.data && data.data.phim.phimbo.filter(item=>{\n       if(inputSearch === \"\"){\n         return item;\n       }else {\n"
+                },
+                {
+                    "date": 1651584480313,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n `;\n const SeriesMovie = data => {\n   const {setMovie ,inputSearch} = useContext(UserContext);\n   const navigate = useNavigate()\n-  console.log(data.phịm);\n+  console.log(data[phim]);\n   const filterData = data && data.data && data.data.phim.phimbo.filter(item=>{\n       if(inputSearch === \"\"){\n         return item;\n       }else {\n"
+                },
+                {
+                    "date": 1651584495675,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n `;\n const SeriesMovie = data => {\n   const {setMovie ,inputSearch} = useContext(UserContext);\n   const navigate = useNavigate()\n-  console.log(data[phim]);\n+  console.log(data.data.phim);\n   const filterData = data && data.data && data.data.phim.phimbo.filter(item=>{\n       if(inputSearch === \"\"){\n         return item;\n       }else {\n"
+                },
+                {
+                    "date": 1651584527672,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,11 @@\n `;\n const SeriesMovie = data => {\n   const {setMovie ,inputSearch} = useContext(UserContext);\n   const navigate = useNavigate()\n-  console.log(data.data.phim);\n+  for (const property in data.data.phim) {\n+    console.log(`${property}: ${data.data.phim[property]}`);\n+  }\n   const filterData = data && data.data && data.data.phim.phimbo.filter(item=>{\n       if(inputSearch === \"\"){\n         return item;\n       }else {\n"
+                },
+                {
+                    "date": 1651584554265,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n `;\n const SeriesMovie = data => {\n   const {setMovie ,inputSearch} = useContext(UserContext);\n   const navigate = useNavigate()\n-  for (const property in data.data.phim) {\n+  for (let property in data.data.phim) {\n     console.log(`${property}: ${data.data.phim[property]}`);\n   }\n   const filterData = data && data.data && data.data.phim.phimbo.filter(item=>{\n       if(inputSearch === \"\"){\n"
+                },
+                {
+                    "date": 1651584575658,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n const SeriesMovie = data => {\n   const {setMovie ,inputSearch} = useContext(UserContext);\n   const navigate = useNavigate()\n   for (let property in data.data.phim) {\n-    console.log(`${property}: ${data.data.phim[property]}`);\n+    console.log(property);\n   }\n   const filterData = data && data.data && data.data.phim.phimbo.filter(item=>{\n       if(inputSearch === \"\"){\n         return item;\n"
+                },
+                {
+                    "date": 1651584614403,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n const SeriesMovie = data => {\n   const {setMovie ,inputSearch} = useContext(UserContext);\n   const navigate = useNavigate()\n   for (let property in data.data.phim) {\n-    console.log(property);\n+    console.log(data.data.phim[property]);\n   }\n   const filterData = data && data.data && data.data.phim.phimbo.filter(item=>{\n       if(inputSearch === \"\"){\n         return item;\n"
+                },
+                {
+                    "date": 1651584765775,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,11 +18,13 @@\n `;\n const SeriesMovie = data => {\n   const {setMovie ,inputSearch} = useContext(UserContext);\n   const navigate = useNavigate()\n+  let datatemp = [];\n   for (let property in data.data.phim) {\n-    console.log(data.data.phim[property]);\n+    datatemp.push(data.data.phim[property])\n   }\n+  console.log(datatemp);\n   const filterData = data && data.data && data.data.phim.phimbo.filter(item=>{\n       if(inputSearch === \"\"){\n         return item;\n       }else {\n"
+                },
+                {
+                    "date": 1651584811273,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n   let datatemp = [];\n   for (let property in data.data.phim) {\n     datatemp.push(data.data.phim[property])\n   }\n-  console.log(datatemp);\n+  console.log([...datatemp]);\n   const filterData = data && data.data && data.data.phim.phimbo.filter(item=>{\n       if(inputSearch === \"\"){\n         return item;\n       }else {\n"
+                },
+                {
+                    "date": 1651584847909,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n   let datatemp = [];\n   for (let property in data.data.phim) {\n     datatemp.push(data.data.phim[property])\n   }\n-  console.log([...datatemp]);\n+  console.log([datatemp[0]]);\n   const filterData = data && data.data && data.data.phim.phimbo.filter(item=>{\n       if(inputSearch === \"\"){\n         return item;\n       }else {\n"
+                },
+                {
+                    "date": 1651585133851,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,13 +18,16 @@\n `;\n const SeriesMovie = data => {\n   const {setMovie ,inputSearch} = useContext(UserContext);\n   const navigate = useNavigate()\n-  let datatemp = [];\n-  for (let property in data.data.phim) {\n-    datatemp.push(data.data.phim[property])\n+  const merge = () => {\n+    let datatemp = [];\n+    for (let property in data.data.phim) {\n+      datatemp.push(data.data.phim[property])\n+    }\n+    return [...datatemp[0], ...datatemp[1],datatemp[2],datatemp[3]]\n   }\n-  console.log([datatemp[0]]);\n+  console.log(merge());\n   const filterData = data && data.data && data.data.phim.phimbo.filter(item=>{\n       if(inputSearch === \"\"){\n         return item;\n       }else {\n"
+                },
+                {
+                    "date": 1651585384176,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,10 +23,15 @@\n     let datatemp = [];\n     for (let property in data.data.phim) {\n       datatemp.push(data.data.phim[property])\n     }\n-    return [...datatemp[0], ...datatemp[1],datatemp[2],datatemp[3]]\n+    return datatemp;\n   }\n+  const merged = merge().reduce((arr, item) => {\n+    arr.push(item);\n+    return arr;    \n+}, {});\n+console.log(merged);\n   console.log(merge());\n   const filterData = data && data.data && data.data.phim.phimbo.filter(item=>{\n       if(inputSearch === \"\"){\n         return item;\n"
+                },
+                {
+                    "date": 1651585439681,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,13 +25,9 @@\n       datatemp.push(data.data.phim[property])\n     }\n     return datatemp;\n   }\n-  const merged = merge().reduce((arr, item) => {\n-    arr.push(item);\n-    return arr;    \n-}, {});\n-console.log(merged);\n+\n   console.log(merge());\n   const filterData = data && data.data && data.data.phim.phimbo.filter(item=>{\n       if(inputSearch === \"\"){\n         return item;\n"
+                },
+                {
+                    "date": 1651585572382,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,12 @@\n     }\n     return datatemp;\n   }\n \n-  console.log(merge());\n+  const merged = merge().map(item => {\n+      return [...item]\n+  })\n+  console.log(merged);\n   const filterData = data && data.data && data.data.phim.phimbo.filter(item=>{\n       if(inputSearch === \"\"){\n         return item;\n       }else {\n"
+                },
+                {
+                    "date": 1651585733221,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,10 +26,11 @@\n     }\n     return datatemp;\n   }\n \n-  const merged = merge().map(item => {\n-      return [...item]\n+  const merged = merge.forEach((item,index)=>{\n+   let temp = []\n+     return temp.push(item[index]);\n   })\n   console.log(merged);\n   const filterData = data && data.data && data.data.phim.phimbo.filter(item=>{\n       if(inputSearch === \"\"){\n"
+                },
+                {
+                    "date": 1651585744982,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n     }\n     return datatemp;\n   }\n \n-  const merged = merge.forEach((item,index)=>{\n+  const merged = merge().forEach((item,index)=>{\n    let temp = []\n      return temp.push(item[index]);\n   })\n   console.log(merged);\n"
+                },
+                {
+                    "date": 1651585784185,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,10 +27,10 @@\n     return datatemp;\n   }\n \n   const merged = merge().forEach((item,index)=>{\n-   let temp = []\n-     return temp.push(item[index]);\n+  //  let temp = []\n+     return [...item];\n   })\n   console.log(merged);\n   const filterData = data && data.data && data.data.phim.phimbo.filter(item=>{\n       if(inputSearch === \"\"){\n"
+                },
+                {
+                    "date": 1651585806366,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,9 @@\n     return datatemp;\n   }\n \n   const merged = merge().forEach((item,index)=>{\n-  //  let temp = []\n+      console.log([...item]);\n      return [...item];\n   })\n   console.log(merged);\n   const filterData = data && data.data && data.data.phim.phimbo.filter(item=>{\n"
+                },
+                {
+                    "date": 1651585855303,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,10 +27,10 @@\n     return datatemp;\n   }\n \n   const merged = merge().forEach((item,index)=>{\n-      console.log([...item]);\n-     return [...item];\n+      let temp = []\n+     return temp += item\n   })\n   console.log(merged);\n   const filterData = data && data.data && data.data.phim.phimbo.filter(item=>{\n       if(inputSearch === \"\"){\n"
+                },
+                {
+                    "date": 1651585907158,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,18 +21,13 @@\n   const navigate = useNavigate()\n   const merge = () => {\n     let datatemp = [];\n     for (let property in data.data.phim) {\n-      datatemp.push(data.data.phim[property])\n+      datatemp.push(...data.data.phim[property])\n     }\n     return datatemp;\n   }\n-\n-  const merged = merge().forEach((item,index)=>{\n-      let temp = []\n-     return temp += item\n-  })\n-  console.log(merged);\n+  console.log(merge);\n   const filterData = data && data.data && data.data.phim.phimbo.filter(item=>{\n       if(inputSearch === \"\"){\n         return item;\n       }else {\n"
+                },
+                {
+                    "date": 1651585917418,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n       datatemp.push(...data.data.phim[property])\n     }\n     return datatemp;\n   }\n-  console.log(merge);\n+  console.log(merge());\n   const filterData = data && data.data && data.data.phim.phimbo.filter(item=>{\n       if(inputSearch === \"\"){\n         return item;\n       }else {\n"
+                },
+                {
+                    "date": 1651585971960,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,10 @@\n       datatemp.push(...data.data.phim[property])\n     }\n     return datatemp;\n   }\n-  console.log(merge());\n+  const merged = merge();\n+  console.log(merged);\n   const filterData = data && data.data && data.data.phim.phimbo.filter(item=>{\n       if(inputSearch === \"\"){\n         return item;\n       }else {\n"
+                },
+                {
+                    "date": 1651585983179,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,17 +18,8 @@\n `;\n const SeriesMovie = data => {\n   const {setMovie ,inputSearch} = useContext(UserContext);\n   const navigate = useNavigate()\n-  const merge = () => {\n-    let datatemp = [];\n-    for (let property in data.data.phim) {\n-      datatemp.push(...data.data.phim[property])\n-    }\n-    return datatemp;\n-  }\n-  const merged = merge();\n-  console.log(merged);\n   const filterData = data && data.data && data.data.phim.phimbo.filter(item=>{\n       if(inputSearch === \"\"){\n         return item;\n       }else {\n"
+                },
+                {
+                    "date": 1651586730596,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,24 +9,27 @@\n   display: flex;\n   flex-wrap: wrap;\n   padding: 0 20px;\n   min-height: 50vh;\n-  justify-content:center;\n+  justify-content: center;\n `;\n const Container = styled.div`\n   max-width: 1300px;\n   margin: 0 auto;\n `;\n const SeriesMovie = data => {\n-  const {setMovie ,inputSearch} = useContext(UserContext);\n-  const navigate = useNavigate()\n-  const filterData = data && data.data && data.data.phim.phimbo.filter(item=>{\n-      if(inputSearch === \"\"){\n+  const { setMovie, inputSearch } = useContext(UserContext);\n+  const navigate = useNavigate();\n+  const filterData =\n+    data &&\n+    data.data &&\n+    data.data.phim.phimbo.filter(item => {\n+      if (inputSearch === \"\") {\n         return item;\n-      }else {\n+      } else {\n         return item.title.toLowerCase().includes(inputSearch);\n       }\n-  });\n+    });\n \n   const handleClickItem = (id, keyid) => {\n     setMovie(data.data.phim.phimbo[id]);\n     navigate(\"/detail\");\n@@ -48,25 +51,29 @@\n     });\n   };\n   return (\n     <Container>\n-    <MovieListContainer className='row'>\n-      {filterData.length > 0 ? filterData.map((item, index) => {\n-          return (\n-            index >= current.minIndex &&\n-            index < current.maxIndex && (\n-            <MovieItem\n-              onClick={handleClickItem}\n-              key={index}\n-              id={index}\n-              item={item}\n-              typemovie={\"Phim bộ\"}\n-            />\n-            )\n-          );\n-        }) :  <Empty description={<span>Phim này hiện chưa có...!!</span>} />}\n-    </MovieListContainer>\n-    <Pagination\n+      <MovieListContainer className='row'>\n+        {filterData.length > 0 ? (\n+          filterData.map((item, index) => {\n+            return (\n+              index >= current.minIndex &&\n+              index < current.maxIndex && (\n+                <MovieItem\n+                  onClick={handleClickItem}\n+                  key={index}\n+                  id={index}\n+                  item={item}\n+                  typemovie={\"Phim bộ\"}\n+                />\n+              )\n+            );\n+          })\n+        ) : (\n+          <Empty description={<span>Phim này hiện chưa có...!!</span>} />\n+        )}\n+      </MovieListContainer>\n+      <Pagination\n         pageSize={pageSize}\n         current={current.current}\n         total={filterData.length}\n         onChange={onChange}\n"
+                },
+                {
+                    "date": 1651589981358,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,10 +52,12 @@\n   };\n   return (\n     <Container>\n       <MovieListContainer className='row'>\n-        {filterData.length > 0 ? (\n-          filterData.map((item, index) => {\n+        {data && data.data && data.data.phim.phimbo.length > 0 ? (\n+          data &&\n+          data.data &&\n+          data.data.phim.phimbo.map((item, index) => {\n             return (\n               index >= current.minIndex &&\n               index < current.maxIndex && (\n                 <MovieItem\n"
+                },
+                {
+                    "date": 1651589994891,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -76,9 +76,9 @@\n       </MovieListContainer>\n       <Pagination\n         pageSize={pageSize}\n         current={current.current}\n-        total={filterData.length}\n+        total={data && data.data && data.data.phim.phimbo.length}\n         onChange={onChange}\n         showSizeChanger={false}\n         size={\"big\"}\n         style={{ textAlign: \"right\", marginRight: \"5%\", marginTop: \"15px\" }}\n"
+                },
+                {
+                    "date": 1651590011874,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,20 +16,10 @@\n   max-width: 1300px;\n   margin: 0 auto;\n `;\n const SeriesMovie = data => {\n-  const { setMovie, inputSearch } = useContext(UserContext);\n+  const { setMovie } = useContext(UserContext);\n   const navigate = useNavigate();\n-  const filterData =\n-    data &&\n-    data.data &&\n-    data.data.phim.phimbo.filter(item => {\n-      if (inputSearch === \"\") {\n-        return item;\n-      } else {\n-        return item.title.toLowerCase().includes(inputSearch);\n-      }\n-    });\n \n   const handleClickItem = (id, keyid) => {\n     setMovie(data.data.phim.phimbo[id]);\n     navigate(\"/detail\");\n"
+                },
+                {
+                    "date": 1651590037337,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n /** @format */\n import { Empty, Pagination } from \"antd\";\n-import React, { useContext, useState, useTransition } from \"react\";\n+import React, { useContext, useState } from \"react\";\n import { useNavigate } from \"react-router-dom\";\n import styled from \"styled-components\";\n import { UserContext } from \"../../../../context/itemmovie-context\";\n import MovieItem from \"../../Components/MovieItem\";\n"
                 }
             ],
             "date": 1651376975302,

@@ -4,7 +4,7 @@ import "./App.css";
 import Header from "./Components/header/Header";
 import HomePage from "./features/Movie/Page/Home";
 import DetailPage from "./features/Movie/Components/DetailPage";
-import {Routes, Route,useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Spin } from "antd";
@@ -14,11 +14,12 @@ import MovieTheaters from "./features/Movie/Page/MovieTheaters/MovieTheaters";
 import Cartoon from "./features/Movie/Page/Cartoon/Cartoon";
 import OddMovie from "./features/Movie/Page/OddMovie/OddMovie";
 import { UserContext } from "./context/itemmovie-context";
+import Search from "./features/Movie/Page/Search/Search";
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState();
-  const {type } = useContext(UserContext);
+  const { type } = useContext(UserContext);
   let location = useLocation();
   useEffect(() => {
     setLoading(true);
@@ -29,35 +30,37 @@ function App() {
         );
         const { data } = await respon;
         setData(data);
-        console.log("renderapp",data);
+        console.log("renderapp", data);
       } catch (error) {
         console.log("Fail to get products", error);
       }
       setLoading(false);
     })();
-  }, [type,location.pathname]);
+  }, [type, location.pathname]);
+
   return (
-      <div className='App'>
-        <Header />
-        {loading ? (
-          <div className='example'>
-            <Spin />
-          </div>
-        ) : (
-          <Routes>
-            <Route path='/' element={<HomePage data={data} />} />
-            <Route path='/detail/*' element={<DetailPage />} />
-            <Route path='/phimbo/*' element={<SeriesMovie data={data} />} />
-            <Route
-              path='/phimchieurap/*'
-              element={<MovieTheaters data={data} />}
-            />
-            <Route path='/phimhoathinh/*' element={<Cartoon data={data} />} />
-            <Route path='/phimle/*' element={<OddMovie data={data} />} />
-          </Routes>
-        )}
-        <Footer />
-      </div>
+    <div className='App'>
+      <Header />
+      {loading ? (
+        <div className='example'>
+          <Spin />
+        </div>
+      ) : (
+        <Routes>
+          <Route path='/' element={<HomePage data={data} />} />
+          <Route path='/detail/*' element={<DetailPage />} />
+          <Route path='/phimbo/*' element={<SeriesMovie data={data} />} />
+          <Route
+            path='/phimchieurap/*'
+            element={<MovieTheaters data={data} />}
+          />
+          <Route path='/phimhoathinh/*' element={<Cartoon data={data} />} />
+          <Route path='/phimle/*' element={<OddMovie data={data} />} />
+          <Route path='/search' element={<Search data={data} />} />
+        </Routes>
+      )}
+      <Footer />
+    </div>
   );
 }
 

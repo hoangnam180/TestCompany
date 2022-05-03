@@ -195,7 +195,7 @@ const DetaiPage = () => {
               </div>
             ))}
             <a href={movie.url} className='episode other'>
-              Xem tại sever khác
+              Xem tại sever khác 
             </a>
           </div>
         </div>

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 127,
+            "activePatchIndex": 128,
             "patches": [
                 {
                     "date": 1651453585272,
@@ -516,6 +516,10 @@
                 {
                     "date": 1651465374812,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,8 @@\n import styled from \"styled-components\";\n import { UserContext } from \"../../../context/itemmovie-context\";\n import Iframe from \"react-iframe\";\n import { Empty } from \"antd\";\n-import { Link } from \"react-router-dom\";\n \n const DetaiPageContainer = styled.div`\n   display: flex;\n   flex-direction: column;\n"
+                },
+                {
+                    "date": 1651503142576,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -194,9 +194,9 @@\n                 {movie.episode.length >= 2 ? \"Tập\" : \"Sever\"}: {index + 1}\n               </div>\n             ))}\n             <a href={movie.url} className='episode other'>\n-              Xem tại sever khác\n+              Xem tại sever khác \n             </a>\n           </div>\n         </div>\n       ) : (\n"
                 }
             ],
             "date": 1651453585272,

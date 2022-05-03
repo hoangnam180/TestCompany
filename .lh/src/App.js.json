@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 23,
+            "activePatchIndex": 35,
             "patches": [
                 {
                     "date": 1651322387145,
@@ -100,6 +100,54 @@
                 {
                     "date": 1651453247832,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,8 @@\n   const [loading, setLoading] = useState(true);\n   const [data, setData] = useState();\n   const {type } = useContext(UserContext);\n   let location = useLocation();\n-  console.log(location);\n   useEffect(() => {\n     setLoading(true);\n     (async () => {\n       try {\n"
+                },
+                {
+                    "date": 1651584219282,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,8 +35,9 @@\n       }\n       setLoading(false);\n     })();\n   }, [type,location.pathname]);\n+  console.log(data.phim.reduce(((r, c) => Object.assign(r, c)), {}));\n   return (\n       <div className='App'>\n         <Header />\n         {loading ? (\n"
+                },
+                {
+                    "date": 1651584300137,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,11 @@\n       }\n       setLoading(false);\n     })();\n   }, [type,location.pathname]);\n-  console.log(data.phim.reduce(((r, c) => Object.assign(r, c)), {}));\n+  for (const property in data.phim) {\n+    console.log(`${property}: ${data.phim[property]}`);\n+  }\n   return (\n       <div className='App'>\n         <Header />\n         {loading ? (\n"
+                },
+                {
+                    "date": 1651584335275,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,11 +35,12 @@\n       }\n       setLoading(false);\n     })();\n   }, [type,location.pathname]);\n-  for (const property in data.phim) {\n-    console.log(`${property}: ${data.phim[property]}`);\n-  }\n+  // for (const property in data.phim) {\n+  //   console.log(`${property}: ${data.phim[property]}`);\n+  // }\n+  console.log(data.phim);\n   return (\n       <div className='App'>\n         <Header />\n         {loading ? (\n"
+                },
+                {
+                    "date": 1651584364138,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,18 +29,19 @@\n         );\n         const { data } = await respon;\n         setData(data);\n         console.log(\"renderapp\",data);\n+         for (const property in data.phim) {\n+    console.log(`${property}: ${data.phim[property]}`);\n+  }\n       } catch (error) {\n         console.log(\"Fail to get products\", error);\n       }\n       setLoading(false);\n     })();\n   }, [type,location.pathname]);\n-  // for (const property in data.phim) {\n-  //   console.log(`${property}: ${data.phim[property]}`);\n-  // }\n-  console.log(data.phim);\n+ \n+\n   return (\n       <div className='App'>\n         <Header />\n         {loading ? (\n"
+                },
+                {
+                    "date": 1651584418662,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,11 +29,8 @@\n         );\n         const { data } = await respon;\n         setData(data);\n         console.log(\"renderapp\",data);\n-         for (const property in data.phim) {\n-    console.log(`${property}: ${data.phim[property]}`);\n-  }\n       } catch (error) {\n         console.log(\"Fail to get products\", error);\n       }\n       setLoading(false);\n"
+                },
+                {
+                    "date": 1651586735634,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import \"./App.css\";\n import Header from \"./Components/header/Header\";\n import HomePage from \"./features/Movie/Page/Home\";\n import DetailPage from \"./features/Movie/Components/DetailPage\";\n-import {Routes, Route,useLocation } from \"react-router-dom\";\n+import { Routes, Route, useLocation } from \"react-router-dom\";\n import { useContext, useEffect, useState } from \"react\";\n import axios from \"axios\";\n import { Spin } from \"antd\";\n import Footer from \"./Components/footer/Footer\";\n@@ -17,9 +17,9 @@\n \n function App() {\n   const [loading, setLoading] = useState(true);\n   const [data, setData] = useState();\n-  const {type } = useContext(UserContext);\n+  const { type } = useContext(UserContext);\n   let location = useLocation();\n   useEffect(() => {\n     setLoading(true);\n     (async () => {\n@@ -28,39 +28,38 @@\n           \"https://api.apify.com/v2/key-value-stores/QubTry45OOCkTyohU/records/LATEST?fbclid=IwAR0nJYHjOqJY60a9OJKatwQ8iBP9p6zyTPB9-mfjyLSa5TJGbalHhODluXw\",\n         );\n         const { data } = await respon;\n         setData(data);\n-        console.log(\"renderapp\",data);\n+        console.log(\"renderapp\", data);\n       } catch (error) {\n         console.log(\"Fail to get products\", error);\n       }\n       setLoading(false);\n     })();\n-  }, [type,location.pathname]);\n- \n+  }, [type, location.pathname]);\n \n   return (\n-      <div className='App'>\n-        <Header />\n-        {loading ? (\n-          <div className='example'>\n-            <Spin />\n-          </div>\n-        ) : (\n-          <Routes>\n-            <Route path='/' element={<HomePage data={data} />} />\n-            <Route path='/detail/*' element={<DetailPage />} />\n-            <Route path='/phimbo/*' element={<SeriesMovie data={data} />} />\n-            <Route\n-              path='/phimchieurap/*'\n-              element={<MovieTheaters data={data} />}\n-            />\n-            <Route path='/phimhoathinh/*' element={<Cartoon data={data} />} />\n-            <Route path='/phimle/*' element={<OddMovie data={data} />} />\n-          </Routes>\n-        )}\n-        <Footer />\n-      </div>\n+    <div className='App'>\n+      <Header />\n+      {loading ? (\n+        <div className='example'>\n+          <Spin />\n+        </div>\n+      ) : (\n+        <Routes>\n+          <Route path='/' element={<HomePage data={data} />} />\n+          <Route path='/detail/*' element={<DetailPage />} />\n+          <Route path='/phimbo/*' element={<SeriesMovie data={data} />} />\n+          <Route\n+            path='/phimchieurap/*'\n+            element={<MovieTheaters data={data} />}\n+          />\n+          <Route path='/phimhoathinh/*' element={<Cartoon data={data} />} />\n+          <Route path='/phimle/*' element={<OddMovie data={data} />} />\n+        </Routes>\n+      )}\n+      <Footer />\n+    </div>\n   );\n }\n \n export default App;\n"
+                },
+                {
+                    "date": 1651586785152,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,8 +54,9 @@\n             element={<MovieTheaters data={data} />}\n           />\n           <Route path='/phimhoathinh/*' element={<Cartoon data={data} />} />\n           <Route path='/phimle/*' element={<OddMovie data={data} />} />\n+          <Route path='/search'></Route>\n         </Routes>\n       )}\n       <Footer />\n     </div>\n"
+                },
+                {
+                    "date": 1651586817387,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,9 @@\n import MovieTheaters from \"./features/Movie/Page/MovieTheaters/MovieTheaters\";\n import Cartoon from \"./features/Movie/Page/Cartoon/Cartoon\";\n import OddMovie from \"./features/Movie/Page/OddMovie/OddMovie\";\n import { UserContext } from \"./context/itemmovie-context\";\n+import Search from \"antd/lib/transfer/search\";\n \n function App() {\n   const [loading, setLoading] = useState(true);\n   const [data, setData] = useState();\n@@ -54,9 +55,9 @@\n             element={<MovieTheaters data={data} />}\n           />\n           <Route path='/phimhoathinh/*' element={<Cartoon data={data} />} />\n           <Route path='/phimle/*' element={<OddMovie data={data} />} />\n-          <Route path='/search'></Route>\n+          <Route path='/search' element={<Search />} />\n         </Routes>\n       )}\n       <Footer />\n     </div>\n"
+                },
+                {
+                    "date": 1651586842736,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,8 @@\n import MovieTheaters from \"./features/Movie/Page/MovieTheaters/MovieTheaters\";\n import Cartoon from \"./features/Movie/Page/Cartoon/Cartoon\";\n import OddMovie from \"./features/Movie/Page/OddMovie/OddMovie\";\n import { UserContext } from \"./context/itemmovie-context\";\n-import Search from \"antd/lib/transfer/search\";\n \n function App() {\n   const [loading, setLoading] = useState(true);\n   const [data, setData] = useState();\n"
+                },
+                {
+                    "date": 1651586849871,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,9 @@\n import MovieTheaters from \"./features/Movie/Page/MovieTheaters/MovieTheaters\";\n import Cartoon from \"./features/Movie/Page/Cartoon/Cartoon\";\n import OddMovie from \"./features/Movie/Page/OddMovie/OddMovie\";\n import { UserContext } from \"./context/itemmovie-context\";\n+import Search from \"./features/Movie/Page/Search/search\";\n \n function App() {\n   const [loading, setLoading] = useState(true);\n   const [data, setData] = useState();\n"
+                },
+                {
+                    "date": 1651587070408,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n             element={<MovieTheaters data={data} />}\n           />\n           <Route path='/phimhoathinh/*' element={<Cartoon data={data} />} />\n           <Route path='/phimle/*' element={<OddMovie data={data} />} />\n-          <Route path='/search' element={<Search />} />\n+          <Route path='/search' element={<Search data={data} />} />\n         </Routes>\n       )}\n       <Footer />\n     </div>\n"
+                },
+                {
+                    "date": 1651587299579,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n import MovieTheaters from \"./features/Movie/Page/MovieTheaters/MovieTheaters\";\n import Cartoon from \"./features/Movie/Page/Cartoon/Cartoon\";\n import OddMovie from \"./features/Movie/Page/OddMovie/OddMovie\";\n import { UserContext } from \"./context/itemmovie-context\";\n-import Search from \"./features/Movie/Page/Search/search\";\n+import Search from \"./features/Movie/Page/Search/Search\";\n \n function App() {\n   const [loading, setLoading] = useState(true);\n   const [data, setData] = useState();\n"
                 }
             ],
             "date": 1651322387145,

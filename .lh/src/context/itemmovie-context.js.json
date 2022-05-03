@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/context/itemmovie-context.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1651503657460,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1651503672267,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n   const [type,setType] = useState(\"TongHop\");\n   const [inputSearch,setInputSearch] = useState(\"\");\n   useEffect(() => {\n     localStorage.setItem(\"parentValueKey\", JSON.stringify(movie));\n-  }, [movie, setMovie]);\n+  }, [movie]);\n   return (\n     <UserContext.Provider value={{ movie, setMovie,type,setType }}>\n       {children}\n     </UserContext.Provider>\n"
+                },
+                {
+                    "date": 1651503887812,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n   useEffect(() => {\n     localStorage.setItem(\"parentValueKey\", JSON.stringify(movie));\n   }, [movie]);\n   return (\n-    <UserContext.Provider value={{ movie, setMovie,type,setType }}>\n+    <UserContext.Provider value={{ movie, setMovie,type,setType,inputSearch,setInputSearch }}>\n       {children}\n     </UserContext.Provider>\n   );\n }\n"
+                }
+            ],
+            "date": 1651503657460,
+            "name": "Commit-0",
+            "content": "/** @format */\n\nimport { useState, createContext, useEffect } from \"react\";\nexport const UserContext = createContext();\nfunction WrapperProvider({ children }) {\n  let retrievedObject = localStorage.getItem(\"parentValueKey\") || \"{}\";\n  const [movie, setMovie] = useState(JSON.parse(retrievedObject));\n  const [type,setType] = useState(\"TongHop\");\n  const [inputSearch,setInputSearch] = useState(\"\");\n  useEffect(() => {\n    localStorage.setItem(\"parentValueKey\", JSON.stringify(movie));\n  }, [movie, setMovie]);\n  return (\n    <UserContext.Provider value={{ movie, setMovie,type,setType }}>\n      {children}\n    </UserContext.Provider>\n  );\n}\nexport default WrapperProvider;\n"
+        }
+    ]
+}

@@ -5,7 +5,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import { Input } from "antd";
 import Logo from "../../Assets/logo/popcorn.png";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../context/itemmovie-context";
 const HeaderWrapper = styled.div`
   display: flex;
@@ -50,6 +50,9 @@ const HeaderWrapper = styled.div`
     margin-left: 2rem;
     width: 50%;
     overflow: hidden;
+    input {
+      outline: none;
+    }
   }
   .input_search {
     flex: 1;
@@ -90,11 +93,36 @@ const Menu = styled.div`
 
 const Header = props => {
   let navigate = useNavigate();
-  const {setType} = useContext(UserContext);
+  const { setType, setInputSearch } = useContext(UserContext);
+  const [input, setInput] = useState();
+  //text Search
+  const handleSearch = e => {
+    let result = e.target.value.toLowerCase();
+    if (result === "") {
+      setInputSearch("");
+    }
+    setInput(result);
+  };
+  //click on search
+  const onSearch = () => {
+    navigate("/search");
+    setInputSearch(input);
+  };
+  //onKeySearch
+  const onKeySearch = e => {
+    if (e.keyCode === 13) {
+      navigate("/search");
+      setInputSearch(input);
+    }
+    if (e.keyCode === 27) {
+      setInputSearch("");
+      setInput("");
+    }
+  };
   const arrNav = [
     {
-      path:"/",
-      name:"Trang chủ"
+      path: "/",
+      name: "Trang chủ",
     },
     {
       path: "/phimbo",
@@ -114,7 +142,7 @@ const Header = props => {
     },
   ];
   const handleClick = (id, item) => {
-      setType(item.path)
+    setType(item.path);
   };
   return (
     <>
@@ -130,8 +158,14 @@ const Header = props => {
           </h1>
         </div>
         <div className='header_searchbox'>
-          <SearchOutlined className='header_icon' />
-          <Input placeholder='Search Movie' className='input_search' />
+          <SearchOutlined onClick={onSearch} className='header_icon' />
+          <Input
+            value={input}
+            onKeyDown={onKeySearch}
+            onChange={handleSearch}
+            placeholder='Tìm tên phim'
+            className='input_search'
+          />
         </div>
       </HeaderWrapper>
       <Menu>
