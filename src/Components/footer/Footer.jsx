@@ -178,17 +178,17 @@ const Footer = () => {
             </li>
 
             <li>
-              <a href='#'>
+              <p href='#'>
                 Copyright 2021 © Home19.net Xem phim mới miễn phí nhanh chất
                 lượng cao. Xem Phim online Việt Sub, Thuyết minh, lồng tiếng
                 chất lượng HD. Xem phim nhanh online chất lượng cao
-              </a>
+              </p>
             </li>
           </ul>
         </li>
 
         <li className='nav__item'>
-          <a href='#'>Email liên hệ: ezphimmoi.net@gmail.com</a>
+          <p href='#'>Email liên hệ: ezphimmoi.net@gmail.com</p>
         </li>
       </ul>
     </FooterWrap>

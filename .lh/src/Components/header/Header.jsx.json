@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 56,
+            "activePatchIndex": 58,
             "patches": [
                 {
                     "date": 1651322569731,
@@ -232,6 +232,14 @@
                 {
                     "date": 1651599421222,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -162,9 +162,9 @@\n           <Input\n             value={input}\n             onKeyDown={onKeySearch}\n             onChange={handleSearch}\n-            placeholder='Search Movie'\n+            placeholder='Tìm tên phim'\n             className='input_search'\n           />\n         </div>\n       </HeaderWrapper>\n"
+                },
+                {
+                    "date": 1651740351448,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -99,8 +99,9 @@\n   const handleSearch = e => {\n     let result = e.target.value.toLowerCase();\n     if (result === \"\") {\n       setInputSearch(\"\");\n+      navigate()\n     }\n     setInput(result);\n   };\n   //click on search\n"
+                },
+                {
+                    "date": 1651768631800,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -99,9 +99,8 @@\n   const handleSearch = e => {\n     let result = e.target.value.toLowerCase();\n     if (result === \"\") {\n       setInputSearch(\"\");\n-      navigate()\n     }\n     setInput(result);\n   };\n   //click on search\n"
                 }
             ],
             "date": 1651322569730,

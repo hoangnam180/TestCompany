@@ -3,11 +3,23 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 3,
             "patches": [
                 {
                     "date": 1651377087818,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1651766495020,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,11 +14,11 @@\n   max-width: 1300px;\n   margin: 0 auto;\n `;\n const Cartoon = data => {\n-  const {setMovie } = useContext(UserContext);\n-  const navigate = useNavigate()\n-  const handleClickItem = (id) => {\n+  const { setMovie } = useContext(UserContext);\n+  const navigate = useNavigate();\n+  const handleClickItem = id => {\n     setMovie(data.data.phim.phimhoathinh[id]);\n     navigate(\"/detail\");\n   };\n   const pageSize = 28;\n@@ -38,27 +38,28 @@\n     });\n   };\n   return (\n     <Container>\n-    <MovieListContainer className='row'>\n-      {data &&\n-        data.data &&\n-        data.data.phim.phimhoathinh.map((item, index) => {\n-          return (\n-            index >= current.minIndex &&\n-            index < current.maxIndex && (\n-            <MovieItem\n-              onClick={handleClickItem}\n-              key={index}\n-              id={index}\n-              item={item}\n-              typemovie={\"Phim hoạt hình\"}\n-            />\n-            )\n-          );\n-        })}\n-    </MovieListContainer>\n-    <Pagination\n+      <MovieListContainer className='row'>\n+        {data &&\n+          data.data &&\n+          data.data.phim.phimhoathinh.map((item, index) => {\n+            return (\n+              index >= current.minIndex &&\n+              index < current.maxIndex && (\n+                <MovieItem\n+                  onClick={handleClickItem}\n+                  key={index}\n+                  id={index}\n+                  keyid='phimhoathinh'\n+                  item={item}\n+                  typemovie={\"Phim hoạt hình\"}\n+                />\n+              )\n+            );\n+          })}\n+      </MovieListContainer>\n+      <Pagination\n         pageSize={pageSize}\n         current={current.current}\n         total={data.data.phim.phimhoathinh.length}\n         onChange={onChange}\n"
+                },
+                {
+                    "date": 1651766523814,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,11 +16,10 @@\n `;\n const Cartoon = data => {\n   const { setMovie } = useContext(UserContext);\n   const navigate = useNavigate();\n-  const handleClickItem = id => {\n-    setMovie(data.data.phim.phimhoathinh[id]);\n-    navigate(\"/detail\");\n+  const handleClickItem = (id, keyid) => {\n+    navigate(`/detail/${keyid}/${id}`);\n   };\n   const pageSize = 28;\n   const [current, setCurrent] = useState({\n     minIndex: 0,\n"
+                },
+                {
+                    "date": 1651766539859,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,8 @@\n /** @format */\n import MovieItem from \"../../Components/MovieItem\";\n import styled from \"styled-components\";\n-import { useContext, useState } from \"react\";\n-import { UserContext } from \"../../../../context/itemmovie-context\";\n+import { useState } from \"react\";\n import { useNavigate } from \"react-router-dom\";\n import { Pagination } from \"antd\";\n const MovieListContainer = styled.div`\n   display: flex;\n@@ -14,9 +13,8 @@\n   max-width: 1300px;\n   margin: 0 auto;\n `;\n const Cartoon = data => {\n-  const { setMovie } = useContext(UserContext);\n   const navigate = useNavigate();\n   const handleClickItem = (id, keyid) => {\n     navigate(`/detail/${keyid}/${id}`);\n   };\n"
                 }
             ],
             "date": 1651377087818,

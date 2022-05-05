@@ -1,12 +1,11 @@
 /** @format */
 
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "antd/dist/antd.css";
 import { Pagination } from "antd";
 import styled from "styled-components";
 import MovieItem from "../../Components/MovieItem";
-import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../../../context/itemmovie-context";
+import { Link, Outlet } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
   Navigation,
@@ -66,14 +65,12 @@ const keyvalue = [
 const HomePage = ({ data }) => {
   const pageSize = 18;
   const [column, setColumn] = useState(5);
-  let navigate = useNavigate();
   const [current, setCurrent] = useState({
     data: data.phim,
     minIndex: 0,
     maxIndex: pageSize,
     current: 1,
   });
-  const { setMovie } = useContext(UserContext);
 
   const onChange = page => {
     setCurrent(prev => {
@@ -85,10 +82,7 @@ const HomePage = ({ data }) => {
       };
     });
   };
-  const handleClickItem = (id, keyid) => {
-    setMovie(data.phim[keyid][id]);
-    navigate("/detail");
-  };
+  const handleClickItem = (id, keyid) => {};
   useEffect(() => {
     const columns = () => {
       if (window.innerWidth < 739) {
@@ -110,10 +104,12 @@ const HomePage = ({ data }) => {
   }, []);
   return (
     <Container>
+      <Outlet />
       {keyvalue.map((item, index) => {
         const { key, title } = item;
         return (
           <div key={key}>
+            <Outlet />
             <Title className='title'>{item.title}</Title>
             <Swiper
               spaceBetween={1}
@@ -130,14 +126,14 @@ const HomePage = ({ data }) => {
                       index >= current.minIndex &&
                       index < current.maxIndex && (
                         <SwiperSlide key={index}>
-                          <MovieItem
-                            onClick={handleClickItem}
-                            id={index}
-                            keyid={key}
-                            item={item}
-                            typemovie={title}
-                            slide={true}
-                          />
+                          <Link to={`detail/${key}/${index}`}>
+                            <MovieItem
+                              onClick={handleClickItem}
+                              item={item}
+                              typemovie={title}
+                              slide={true}
+                            />
+                          </Link>
                         </SwiperSlide>
                       )
                     );

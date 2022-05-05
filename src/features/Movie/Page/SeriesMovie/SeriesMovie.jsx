@@ -1,9 +1,8 @@
 /** @format */
 import { Empty, Pagination } from "antd";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { UserContext } from "../../../../context/itemmovie-context";
 import MovieItem from "../../Components/MovieItem";
 const MovieListContainer = styled.div`
   display: flex;
@@ -17,12 +16,10 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 const SeriesMovie = data => {
-  const { setMovie } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleClickItem = (id, keyid) => {
-    setMovie(data.data.phim.phimbo[id]);
-    navigate("/detail");
+    navigate(`/detail/${keyid}/${id}`);
   };
   const pageSize = 30;
   const [current, setCurrent] = useState({
@@ -54,6 +51,7 @@ const SeriesMovie = data => {
                   onClick={handleClickItem}
                   key={index}
                   id={index}
+                  keyid='phimbo'
                   item={item}
                   typemovie={"Phim bộ"}
                 />

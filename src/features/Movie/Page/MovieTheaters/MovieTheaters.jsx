@@ -2,8 +2,7 @@
 
 import MovieItem from "../../Components/MovieItem";
 import styled from "styled-components";
-import { useContext, useState } from "react";
-import { UserContext } from "../../../../context/itemmovie-context";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "antd";
 const MovieListContainer = styled.div`
@@ -16,11 +15,9 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 const MovieTheaters = data => {
-  const {setMovie } = useContext(UserContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleClickItem = (id, keyid) => {
-    setMovie(data.data.phim.phimchieurap[id]);
-    navigate("/detail");
+    navigate(`/detail/${keyid}/${id}`);
   };
   const pageSize = 28;
   const [current, setCurrent] = useState({
@@ -40,25 +37,26 @@ const MovieTheaters = data => {
   };
   return (
     <Container>
-    <MovieListContainer className='row'>
-      {data &&
-        data.data &&
-        data.data.phim.phimchieurap.map((item, index) => {
-          
-          return (
-            index >= current.minIndex &&
-            index < current.maxIndex && (
-            <MovieItem
-              onClick={handleClickItem}
-              key={index}
-              id={index}
-              item={item}
-              typemovie={"Phim chiếu rạp"}
-            />)
-          );
-        })}
-    </MovieListContainer>
-    <Pagination
+      <MovieListContainer className='row'>
+        {data &&
+          data.data &&
+          data.data.phim.phimchieurap.map((item, index) => {
+            return (
+              index >= current.minIndex &&
+              index < current.maxIndex && (
+                <MovieItem
+                  onClick={handleClickItem}
+                  key={index}
+                  id={index}
+                  keyid='phimchieurap'
+                  item={item}
+                  typemovie={"Phim chiếu rạp"}
+                />
+              )
+            );
+          })}
+      </MovieListContainer>
+      <Pagination
         pageSize={pageSize}
         current={current.current}
         total={data.data.phim.phimchieurap.length}

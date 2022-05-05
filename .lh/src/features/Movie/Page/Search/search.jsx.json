@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 9,
+            "activePatchIndex": 33,
             "patches": [
                 {
                     "date": 1651586548289,
@@ -44,6 +44,102 @@
                 {
                     "date": 1651598748010,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,10 +37,10 @@\n         return item.title.toLowerCase().includes(inputSearch);\n       }\n     });\n \n-  const handleClickItem = (id, keyid) => {\n-    setMovie(data.data.phim.phimbo[id]);\n+  const handleClickItem = id => {\n+    setMovie(filterData[id]);\n     navigate(\"/detail\");\n   };\n   const pageSize = window.innerWidth < 1200 ? 28 : 30;\n   const [current, setCurrent] = useState({\n"
+                },
+                {
+                    "date": 1651766979441,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -70,9 +70,9 @@\n                   onClick={handleClickItem}\n                   key={index}\n                   id={index}\n                   item={item}\n-                  typemovie={\"Phim bộ\"}\n+                  typemovie={\"Tổng hợp\"}\n                 />\n               )\n             );\n           })\n"
+                },
+                {
+                    "date": 1651767007756,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,8 +69,9 @@\n                 <MovieItem\n                   onClick={handleClickItem}\n                   key={index}\n                   id={index}\n+                  keyid='phimle'\n                   item={item}\n                   typemovie={\"Tổng hợp\"}\n                 />\n               )\n"
+                },
+                {
+                    "date": 1651767266754,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,11 +69,10 @@\n                 <MovieItem\n                   onClick={handleClickItem}\n                   key={index}\n                   id={index}\n-                  keyid='phimle'\n                   item={item}\n-                  typemovie={\"Tổng hợp\"}\n+                  typemovie={\"Phim bộ\"}\n                 />\n               )\n             );\n           })\n"
+                },
+                {
+                    "date": 1651767375388,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n /** @format */\n import { Empty, Pagination } from \"antd\";\n import React, { useContext, useState } from \"react\";\n-import { useNavigate } from \"react-router-dom\";\n+import { Route, Routes, useNavigate } from \"react-router-dom\";\n import styled from \"styled-components\";\n import { UserContext } from \"../../../../context/itemmovie-context\";\n import MovieItem from \"../../Components/MovieItem\";\n const MovieListContainer = styled.div`\n@@ -88,8 +88,9 @@\n         showSizeChanger={false}\n         size={\"big\"}\n         style={{ textAlign: \"right\", marginRight: \"5%\", marginTop: \"15px\" }}\n       />\n+      <Routes>{/* <Route path=\"me\" element={<MyProfile />} /> */}</Routes>\n     </Container>\n   );\n };\n \n"
+                },
+                {
+                    "date": 1651767563575,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n import { Route, Routes, useNavigate } from \"react-router-dom\";\n import styled from \"styled-components\";\n import { UserContext } from \"../../../../context/itemmovie-context\";\n import MovieItem from \"../../Components/MovieItem\";\n+import OthersMovie from \"../../Components/OthersMovie\";\n const MovieListContainer = styled.div`\n   display: flex;\n   flex-wrap: wrap;\n   padding: 0 20px;\n@@ -88,9 +89,11 @@\n         showSizeChanger={false}\n         size={\"big\"}\n         style={{ textAlign: \"right\", marginRight: \"5%\", marginTop: \"15px\" }}\n       />\n-      <Routes>{/* <Route path=\"me\" element={<MyProfile />} /> */}</Routes>\n+      <Routes>\n+        <Route path='me' element={<OthersMovie />} />\n+      </Routes>\n     </Container>\n   );\n };\n \n"
+                },
+                {
+                    "date": 1651767604812,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,9 +90,9 @@\n         size={\"big\"}\n         style={{ textAlign: \"right\", marginRight: \"5%\", marginTop: \"15px\" }}\n       />\n       <Routes>\n-        <Route path='me' element={<OthersMovie />} />\n+        <Route path='me' element={<OthersMovie data={filterData} />} />\n       </Routes>\n     </Container>\n   );\n };\n"
+                },
+                {
+                    "date": 1651767697683,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,10 +39,10 @@\n       }\n     });\n \n   const handleClickItem = id => {\n-    setMovie(filterData[id]);\n-    navigate(\"/detail\");\n+    // setMovie(filterData[id]);\n+    navigate(\"me\");\n   };\n   const pageSize = window.innerWidth < 1200 ? 28 : 30;\n   const [current, setCurrent] = useState({\n     minIndex: 0,\n"
+                },
+                {
+                    "date": 1651767730261,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,9 +90,9 @@\n         size={\"big\"}\n         style={{ textAlign: \"right\", marginRight: \"5%\", marginTop: \"15px\" }}\n       />\n       <Routes>\n-        <Route path='me' element={<OthersMovie data={filterData} />} />\n+        <Route path=':id' element={<OthersMovie data={filterData} />} />\n       </Routes>\n     </Container>\n   );\n };\n"
+                },
+                {
+                    "date": 1651767752539,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,9 @@\n     });\n \n   const handleClickItem = id => {\n     // setMovie(filterData[id]);\n-    navigate(\"me\");\n+    navigate(`${id}`);\n   };\n   const pageSize = window.innerWidth < 1200 ? 28 : 30;\n   const [current, setCurrent] = useState({\n     minIndex: 0,\n"
+                },
+                {
+                    "date": 1651767789788,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -89,11 +89,11 @@\n         showSizeChanger={false}\n         size={\"big\"}\n         style={{ textAlign: \"right\", marginRight: \"5%\", marginTop: \"15px\" }}\n       />\n-      <Routes>\n+      {/* <Routes>\n         <Route path=':id' element={<OthersMovie data={filterData} />} />\n-      </Routes>\n+      </Routes> */}\n     </Container>\n   );\n };\n \n"
+                },
+                {
+                    "date": 1651767842757,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -92,8 +92,11 @@\n       />\n       {/* <Routes>\n         <Route path=':id' element={<OthersMovie data={filterData} />} />\n       </Routes> */}\n+      <Routes>\n+        <Route path='me' element={<OthersMovie data={filterData} />} />\n+      </Routes>\n     </Container>\n   );\n };\n \n"
+                },
+                {
+                    "date": 1651767926392,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -92,11 +92,8 @@\n       />\n       {/* <Routes>\n         <Route path=':id' element={<OthersMovie data={filterData} />} />\n       </Routes> */}\n-      <Routes>\n-        <Route path='me' element={<OthersMovie data={filterData} />} />\n-      </Routes>\n     </Container>\n   );\n };\n \n"
+                },
+                {
+                    "date": 1651768085954,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -89,11 +89,8 @@\n         showSizeChanger={false}\n         size={\"big\"}\n         style={{ textAlign: \"right\", marginRight: \"5%\", marginTop: \"15px\" }}\n       />\n-      {/* <Routes>\n-        <Route path=':id' element={<OthersMovie data={filterData} />} />\n-      </Routes> */}\n     </Container>\n   );\n };\n \n"
+                },
+                {
+                    "date": 1651768178221,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n /** @format */\n import { Empty, Pagination } from \"antd\";\n import React, { useContext, useState } from \"react\";\n-import { Route, Routes, useNavigate } from \"react-router-dom\";\n+import { Outlet, Route, Routes, useNavigate } from \"react-router-dom\";\n import styled from \"styled-components\";\n import { UserContext } from \"../../../../context/itemmovie-context\";\n import MovieItem from \"../../Components/MovieItem\";\n import OthersMovie from \"../../Components/OthersMovie\";\n@@ -89,8 +89,9 @@\n         showSizeChanger={false}\n         size={\"big\"}\n         style={{ textAlign: \"right\", marginRight: \"5%\", marginTop: \"15px\" }}\n       />\n+      <Outlet />\n     </Container>\n   );\n };\n \n"
+                },
+                {
+                    "date": 1651768469162,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,11 @@\n /** @format */\n import { Empty, Pagination } from \"antd\";\n import React, { useContext, useState } from \"react\";\n-import { Outlet, Route, Routes, useNavigate } from \"react-router-dom\";\n+import { useNavigate } from \"react-router-dom\";\n import styled from \"styled-components\";\n import { UserContext } from \"../../../../context/itemmovie-context\";\n import MovieItem from \"../../Components/MovieItem\";\n-import OthersMovie from \"../../Components/OthersMovie\";\n const MovieListContainer = styled.div`\n   display: flex;\n   flex-wrap: wrap;\n   padding: 0 20px;\n@@ -39,10 +38,10 @@\n       }\n     });\n \n   const handleClickItem = id => {\n-    // setMovie(filterData[id]);\n-    navigate(`${id}`);\n+    setMovie(filterData[id]);\n+    navigate(\"/detail\");\n   };\n   const pageSize = window.innerWidth < 1200 ? 28 : 30;\n   const [current, setCurrent] = useState({\n     minIndex: 0,\n@@ -89,9 +88,8 @@\n         showSizeChanger={false}\n         size={\"big\"}\n         style={{ textAlign: \"right\", marginRight: \"5%\", marginTop: \"15px\" }}\n       />\n-      <Outlet />\n     </Container>\n   );\n };\n \n"
+                },
+                {
+                    "date": 1651768855410,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n     });\n \n   const handleClickItem = id => {\n     setMovie(filterData[id]);\n-    navigate(\"/detail\");\n+    navigate(`${id}`);\n   };\n   const pageSize = window.innerWidth < 1200 ? 28 : 30;\n   const [current, setCurrent] = useState({\n     minIndex: 0,\n"
+                },
+                {
+                    "date": 1651768878116,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -70,9 +70,9 @@\n                   onClick={handleClickItem}\n                   key={index}\n                   id={index}\n                   item={item}\n-                  typemovie={\"Phim bộ\"}\n+                  typemovie={\"Tổng hợp\"}\n                 />\n               )\n             );\n           })\n"
+                },
+                {
+                    "date": 1651768918484,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,8 @@\n       }\n     });\n \n   const handleClickItem = id => {\n-    setMovie(filterData[id]);\n     navigate(`${id}`);\n   };\n   const pageSize = window.innerWidth < 1200 ? 28 : 30;\n   const [current, setCurrent] = useState({\n"
+                },
+                {
+                    "date": 1651768926034,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n   max-width: 1300px;\n   margin: 0 auto;\n `;\n const Search = data => {\n-  const { setMovie, inputSearch } = useContext(UserContext);\n+  const { inputSearch } = useContext(UserContext);\n   const navigate = useNavigate();\n \n   const merge = () => {\n     let datatemp = [];\n"
+                },
+                {
+                    "date": 1651769018716,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n       }\n     });\n \n   const handleClickItem = id => {\n-    navigate(`${id}`);\n+    navigate(`search/${id}`);\n   };\n   const pageSize = window.innerWidth < 1200 ? 28 : 30;\n   const [current, setCurrent] = useState({\n     minIndex: 0,\n"
+                },
+                {
+                    "date": 1651769399360,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n /** @format */\n import { Empty, Pagination } from \"antd\";\n import React, { useContext, useState } from \"react\";\n-import { useNavigate } from \"react-router-dom\";\n+import { Outlet, useNavigate } from \"react-router-dom\";\n import styled from \"styled-components\";\n import { UserContext } from \"../../../../context/itemmovie-context\";\n import MovieItem from \"../../Components/MovieItem\";\n const MovieListContainer = styled.div`\n@@ -38,9 +38,9 @@\n       }\n     });\n \n   const handleClickItem = id => {\n-    navigate(`search/${id}`);\n+    navigate(`/search/${id}`);\n   };\n   const pageSize = window.innerWidth < 1200 ? 28 : 30;\n   const [current, setCurrent] = useState({\n     minIndex: 0,\n@@ -87,8 +87,9 @@\n         showSizeChanger={false}\n         size={\"big\"}\n         style={{ textAlign: \"right\", marginRight: \"5%\", marginTop: \"15px\" }}\n       />\n+      <Outlet />\n     </Container>\n   );\n };\n \n"
+                },
+                {
+                    "date": 1651769543550,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n       }\n     });\n \n   const handleClickItem = id => {\n-    navigate(`/search/${id}`);\n+    navigate(`${id}`);\n   };\n   const pageSize = window.innerWidth < 1200 ? 28 : 30;\n   const [current, setCurrent] = useState({\n     minIndex: 0,\n"
+                },
+                {
+                    "date": 1651770114136,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n       }\n     });\n \n   const handleClickItem = id => {\n-    navigate(`${id}`);\n+    navigate(`search/${id}`);\n   };\n   const pageSize = window.innerWidth < 1200 ? 28 : 30;\n   const [current, setCurrent] = useState({\n     minIndex: 0,\n"
+                },
+                {
+                    "date": 1651770128184,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n       }\n     });\n \n   const handleClickItem = id => {\n-    navigate(`search/${id}`);\n+    navigate(`/search/${id}`);\n   };\n   const pageSize = window.innerWidth < 1200 ? 28 : 30;\n   const [current, setCurrent] = useState({\n     minIndex: 0,\n"
                 }
             ],
             "date": 1651586548289,

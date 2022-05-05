@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 128,
+            "activePatchIndex": 153,
             "patches": [
                 {
                     "date": 1651453585272,
@@ -520,6 +520,106 @@
                 {
                     "date": 1651503142576,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -194,9 +194,9 @@\n                 {movie.episode.length >= 2 ? \"Tập\" : \"Sever\"}: {index + 1}\n               </div>\n             ))}\n             <a href={movie.url} className='episode other'>\n-              Xem tại sever khác\n+              Xem tại sever khác \n             </a>\n           </div>\n         </div>\n       ) : (\n"
+                },
+                {
+                    "date": 1651743333190,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n import styled from \"styled-components\";\n import { UserContext } from \"../../../context/itemmovie-context\";\n import Iframe from \"react-iframe\";\n import { Empty } from \"antd\";\n+import { useParams } from \"react-router-dom\";\n \n const DetaiPageContainer = styled.div`\n   display: flex;\n   flex-direction: column;\n@@ -157,8 +158,10 @@\n   }\n `;\n const DetaiPage = () => {\n   const { movie } = useContext(UserContext);\n+  const params = useParams();\n+  console.log(params);\n   const urldefault =\n     movie && movie.episode && movie.episode.length > 0 && movie.episode[0]?.url;\n   const [urlMovie, setUrlMovie] = useState(urldefault);\n   console.log(movie);\n"
+                },
+                {
+                    "date": 1651752896337,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import styled from \"styled-components\";\n import { UserContext } from \"../../../context/itemmovie-context\";\n import Iframe from \"react-iframe\";\n import { Empty } from \"antd\";\n-import { useParams } from \"react-router-dom\";\n+import { Outlet, useParams } from \"react-router-dom\";\n \n const DetaiPageContainer = styled.div`\n   display: flex;\n   flex-direction: column;\n@@ -166,8 +166,9 @@\n   const [urlMovie, setUrlMovie] = useState(urldefault);\n   console.log(movie);\n   return (\n     <DetaiPageContainer>\n+      <Outlet/>\n       {movie && movie.episode && movie.episode.length > 0 ? (\n         <div className='video'>\n           <Iframe\n             url={urlMovie}\n"
+                },
+                {
+                    "date": 1651753346958,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -166,9 +166,8 @@\n   const [urlMovie, setUrlMovie] = useState(urldefault);\n   console.log(movie);\n   return (\n     <DetaiPageContainer>\n-      <Outlet/>\n       {movie && movie.episode && movie.episode.length > 0 ? (\n         <div className='video'>\n           <Iframe\n             url={urlMovie}\n"
+                },
+                {
+                    "date": 1651760473021,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -166,8 +166,9 @@\n   const [urlMovie, setUrlMovie] = useState(urldefault);\n   console.log(movie);\n   return (\n     <DetaiPageContainer>\n+      <Outlet/>\n       {movie && movie.episode && movie.episode.length > 0 ? (\n         <div className='video'>\n           <Iframe\n             url={urlMovie}\n"
+                },
+                {
+                    "date": 1651761365656,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -166,9 +166,8 @@\n   const [urlMovie, setUrlMovie] = useState(urldefault);\n   console.log(movie);\n   return (\n     <DetaiPageContainer>\n-      <Outlet/>\n       {movie && movie.episode && movie.episode.length > 0 ? (\n         <div className='video'>\n           <Iframe\n             url={urlMovie}\n"
+                },
+                {
+                    "date": 1651762732928,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -158,10 +158,8 @@\n   }\n `;\n const DetaiPage = () => {\n   const { movie } = useContext(UserContext);\n-  const params = useParams();\n-  console.log(params);\n   const urldefault =\n     movie && movie.episode && movie.episode.length > 0 && movie.episode[0]?.url;\n   const [urlMovie, setUrlMovie] = useState(urldefault);\n   console.log(movie);\n"
+                },
+                {
+                    "date": 1651763837194,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -156,14 +156,14 @@\n       background-image: unset;\n     }\n   }\n `;\n-const DetaiPage = () => {\n+const DetaiPage = ({data}) => {\n+  console.log(data);\n   const { movie } = useContext(UserContext);\n   const urldefault =\n     movie && movie.episode && movie.episode.length > 0 && movie.episode[0]?.url;\n   const [urlMovie, setUrlMovie] = useState(urldefault);\n-  console.log(movie);\n   return (\n     <DetaiPageContainer>\n       {movie && movie.episode && movie.episode.length > 0 ? (\n         <div className='video'>\n"
+                },
+                {
+                    "date": 1651763936170,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -157,9 +157,11 @@\n     }\n   }\n `;\n const DetaiPage = ({data}) => {\n-  console.log(data);\n+  const params = useParams();\n+  console.log(params);\n+  // const movie = data.phim[]\n   const { movie } = useContext(UserContext);\n   const urldefault =\n     movie && movie.episode && movie.episode.length > 0 && movie.episode[0]?.url;\n   const [urlMovie, setUrlMovie] = useState(urldefault);\n"
+                },
+                {
+                    "date": 1651764072697,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -158,10 +158,11 @@\n   }\n `;\n const DetaiPage = ({data}) => {\n   const params = useParams();\n-  console.log(params);\n-  // const movie = data.phim[]\n+  const id = Number.parseInt(params.id)\n+  const movies = data.phim[params.key][id];\n+  console.log(movies);\n   const { movie } = useContext(UserContext);\n   const urldefault =\n     movie && movie.episode && movie.episode.length > 0 && movie.episode[0]?.url;\n   const [urlMovie, setUrlMovie] = useState(urldefault);\n"
+                },
+                {
+                    "date": 1651764120403,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -159,10 +159,10 @@\n `;\n const DetaiPage = ({data}) => {\n   const params = useParams();\n   const id = Number.parseInt(params.id)\n-  const movies = data.phim[params.key][id];\n-  console.log(movies);\n+  // const movies = data.phim[params.key][id];\n+  console.log(data.phim);\n   const { movie } = useContext(UserContext);\n   const urldefault =\n     movie && movie.episode && movie.episode.length > 0 && movie.episode[0]?.url;\n   const [urlMovie, setUrlMovie] = useState(urldefault);\n"
+                },
+                {
+                    "date": 1651764132947,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -160,9 +160,9 @@\n const DetaiPage = ({data}) => {\n   const params = useParams();\n   const id = Number.parseInt(params.id)\n   // const movies = data.phim[params.key][id];\n-  console.log(data.phim);\n+  console.log(data.phim[params.key]);\n   const { movie } = useContext(UserContext);\n   const urldefault =\n     movie && movie.episode && movie.episode.length > 0 && movie.episode[0]?.url;\n   const [urlMovie, setUrlMovie] = useState(urldefault);\n"
+                },
+                {
+                    "date": 1651764146572,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -160,9 +160,9 @@\n const DetaiPage = ({data}) => {\n   const params = useParams();\n   const id = Number.parseInt(params.id)\n   // const movies = data.phim[params.key][id];\n-  console.log(data.phim[params.key]);\n+  console.log(data.phim[params.key].id);\n   const { movie } = useContext(UserContext);\n   const urldefault =\n     movie && movie.episode && movie.episode.length > 0 && movie.episode[0]?.url;\n   const [urlMovie, setUrlMovie] = useState(urldefault);\n"
+                },
+                {
+                    "date": 1651764154408,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -160,9 +160,9 @@\n const DetaiPage = ({data}) => {\n   const params = useParams();\n   const id = Number.parseInt(params.id)\n   // const movies = data.phim[params.key][id];\n-  console.log(data.phim[params.key].id);\n+  console.log(data.phim[params.key]);\n   const { movie } = useContext(UserContext);\n   const urldefault =\n     movie && movie.episode && movie.episode.length > 0 && movie.episode[0]?.url;\n   const [urlMovie, setUrlMovie] = useState(urldefault);\n"
+                },
+                {
+                    "date": 1651764160284,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -159,8 +159,9 @@\n `;\n const DetaiPage = ({data}) => {\n   const params = useParams();\n   const id = Number.parseInt(params.id)\n+  console.log(id);\n   // const movies = data.phim[params.key][id];\n   console.log(data.phim[params.key]);\n   const { movie } = useContext(UserContext);\n   const urldefault =\n"
+                },
+                {
+                    "date": 1651764175012,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -158,9 +158,9 @@\n   }\n `;\n const DetaiPage = ({data}) => {\n   const params = useParams();\n-  const id = Number.parseInt(params.id)\n+  const id = params.id\n   console.log(id);\n   // const movies = data.phim[params.key][id];\n   console.log(data.phim[params.key]);\n   const { movie } = useContext(UserContext);\n"
+                },
+                {
+                    "date": 1651764200283,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -159,9 +159,9 @@\n `;\n const DetaiPage = ({data}) => {\n   const params = useParams();\n   const id = params.id\n-  console.log(id);\n+  console.log(params);\n   // const movies = data.phim[params.key][id];\n   console.log(data.phim[params.key]);\n   const { movie } = useContext(UserContext);\n   const urldefault =\n"
+                },
+                {
+                    "date": 1651764215322,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -158,10 +158,10 @@\n   }\n `;\n const DetaiPage = ({data}) => {\n   const params = useParams();\n-  const id = params.id\n-  console.log(params);\n+  const id = Number.parseInt(params.detailId)\n+  console.log(id);\n   // const movies = data.phim[params.key][id];\n   console.log(data.phim[params.key]);\n   const { movie } = useContext(UserContext);\n   const urldefault =\n"
+                },
+                {
+                    "date": 1651764231333,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -159,11 +159,10 @@\n `;\n const DetaiPage = ({data}) => {\n   const params = useParams();\n   const id = Number.parseInt(params.detailId)\n-  console.log(id);\n   // const movies = data.phim[params.key][id];\n-  console.log(data.phim[params.key]);\n+  console.log(data.phim[params.key][id]);\n   const { movie } = useContext(UserContext);\n   const urldefault =\n     movie && movie.episode && movie.episode.length > 0 && movie.episode[0]?.url;\n   const [urlMovie, setUrlMovie] = useState(urldefault);\n"
+                },
+                {
+                    "date": 1651764306694,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -158,12 +158,11 @@\n   }\n `;\n const DetaiPage = ({data}) => {\n   const params = useParams();\n-  const id = Number.parseInt(params.detailId)\n-  // const movies = data.phim[params.key][id];\n-  console.log(data.phim[params.key][id]);\n-  const { movie } = useContext(UserContext);\n+  const id = params &&  Number.parseInt(params.detailId)\n+  const movie = params && data.phim[params.key][id];\n+  // const { movie } = useContext(UserContext);\n   const urldefault =\n     movie && movie.episode && movie.episode.length > 0 && movie.episode[0]?.url;\n   const [urlMovie, setUrlMovie] = useState(urldefault);\n   return (\n"
+                },
+                {
+                    "date": 1651764380576,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -158,9 +158,9 @@\n   }\n `;\n const DetaiPage = ({data}) => {\n   const params = useParams();\n-  const id = params &&  Number.parseInt(params.detailId)\n+  const id = params &&  Number.parseInt(params.detailId);\n   const movie = params && data.phim[params.key][id];\n   // const { movie } = useContext(UserContext);\n   const urldefault =\n     movie && movie.episode && movie.episode.length > 0 && movie.episode[0]?.url;\n"
+                },
+                {
+                    "date": 1651764864957,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -160,9 +160,8 @@\n const DetaiPage = ({data}) => {\n   const params = useParams();\n   const id = params &&  Number.parseInt(params.detailId);\n   const movie = params && data.phim[params.key][id];\n-  // const { movie } = useContext(UserContext);\n   const urldefault =\n     movie && movie.episode && movie.episode.length > 0 && movie.episode[0]?.url;\n   const [urlMovie, setUrlMovie] = useState(urldefault);\n   return (\n"
+                },
+                {
+                    "date": 1651764899237,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -157,8 +157,9 @@\n     }\n   }\n `;\n const DetaiPage = ({data}) => {\n+  //get useParam on url get data id\n   const params = useParams();\n   const id = params &&  Number.parseInt(params.detailId);\n   const movie = params && data.phim[params.key][id];\n   const urldefault =\n"
+                },
+                {
+                    "date": 1651765017737,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import styled from \"styled-components\";\n import { UserContext } from \"../../../context/itemmovie-context\";\n import Iframe from \"react-iframe\";\n import { Empty } from \"antd\";\n-import { Outlet, useParams } from \"react-router-dom\";\n+import {useParams } from \"react-router-dom\";\n \n const DetaiPageContainer = styled.div`\n   display: flex;\n   flex-direction: column;\n"
+                },
+                {
+                    "date": 1651770615954,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,11 @@\n /** @format */\n \n import React, { useContext, useState } from \"react\";\n import styled from \"styled-components\";\n-import { UserContext } from \"../../../context/itemmovie-context\";\n import Iframe from \"react-iframe\";\n import { Empty } from \"antd\";\n-import {useParams } from \"react-router-dom\";\n+import { useParams } from \"react-router-dom\";\n \n const DetaiPageContainer = styled.div`\n   display: flex;\n   flex-direction: column;\n@@ -156,12 +155,12 @@\n       background-image: unset;\n     }\n   }\n `;\n-const DetaiPage = ({data}) => {\n+const DetaiPage = ({ data }) => {\n   //get useParam on url get data id\n   const params = useParams();\n-  const id = params &&  Number.parseInt(params.detailId);\n+  const id = params && Number.parseInt(params.detailId);\n   const movie = params && data.phim[params.key][id];\n   const urldefault =\n     movie && movie.episode && movie.episode.length > 0 && movie.episode[0]?.url;\n   const [urlMovie, setUrlMovie] = useState(urldefault);\n@@ -197,9 +196,9 @@\n                 {movie.episode.length >= 2 ? \"Tập\" : \"Sever\"}: {index + 1}\n               </div>\n             ))}\n             <a href={movie.url} className='episode other'>\n-              Xem tại sever khác \n+              Xem tại sever khác\n             </a>\n           </div>\n         </div>\n       ) : (\n"
+                },
+                {
+                    "date": 1651770713778,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n /** @format */\n \n-import React, { useContext, useState } from \"react\";\n+import React, { useState } from \"react\";\n import styled from \"styled-components\";\n import Iframe from \"react-iframe\";\n import { Empty } from \"antd\";\n import { useParams } from \"react-router-dom\";\n"
                 }
             ],
             "date": 1651453585272,

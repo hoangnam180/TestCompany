@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 47,
+            "activePatchIndex": 57,
             "patches": [
                 {
                     "date": 1651376975302,
@@ -196,6 +196,46 @@
                 {
                     "date": 1651590037337,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n /** @format */\n import { Empty, Pagination } from \"antd\";\n-import React, { useContext, useState, useTransition } from \"react\";\n+import React, { useContext, useState } from \"react\";\n import { useNavigate } from \"react-router-dom\";\n import styled from \"styled-components\";\n import { UserContext } from \"../../../../context/itemmovie-context\";\n import MovieItem from \"../../Components/MovieItem\";\n"
+                },
+                {
+                    "date": 1651765888062,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n /** @format */\n import { Empty, Pagination } from \"antd\";\n import React, { useContext, useState } from \"react\";\n-import { useNavigate } from \"react-router-dom\";\n+import { Link, useNavigate } from \"react-router-dom\";\n import styled from \"styled-components\";\n import { UserContext } from \"../../../../context/itemmovie-context\";\n import MovieItem from \"../../Components/MovieItem\";\n const MovieListContainer = styled.div`\n@@ -49,15 +49,16 @@\n           data.data.phim.phimbo.map((item, index) => {\n             return (\n               index >= current.minIndex &&\n               index < current.maxIndex && (\n-                <MovieItem\n-                  onClick={handleClickItem}\n-                  key={index}\n-                  id={index}\n-                  item={item}\n-                  typemovie={\"Phim bộ\"}\n-                />\n+                <Link to={`detail/phimbo/${index}`}>\n+                  <MovieItem\n+                    onClick={handleClickItem}\n+                    item={item}\n+                    typemovie={\"Phim bộ\"}\n+                    slide={true}\n+                  />\n+                </Link>\n               )\n             );\n           })\n         ) : (\n"
+                },
+                {
+                    "date": 1651765906233,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,9 +54,9 @@\n                   <MovieItem\n                     onClick={handleClickItem}\n                     item={item}\n                     typemovie={\"Phim bộ\"}\n-                    slide={true}\n+                    slide={\"false\"}\n                   />\n                 </Link>\n               )\n             );\n"
+                },
+                {
+                    "date": 1651765937165,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,9 +54,9 @@\n                   <MovieItem\n                     onClick={handleClickItem}\n                     item={item}\n                     typemovie={\"Phim bộ\"}\n-                    slide={\"false\"}\n+                    slide={false}\n                   />\n                 </Link>\n               )\n             );\n"
+                },
+                {
+                    "date": 1651765960932,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n /** @format */\n import { Empty, Pagination } from \"antd\";\n import React, { useContext, useState } from \"react\";\n-import { Link, useNavigate } from \"react-router-dom\";\n+import { useNavigate } from \"react-router-dom\";\n import styled from \"styled-components\";\n import { UserContext } from \"../../../../context/itemmovie-context\";\n import MovieItem from \"../../Components/MovieItem\";\n const MovieListContainer = styled.div`\n@@ -49,16 +49,15 @@\n           data.data.phim.phimbo.map((item, index) => {\n             return (\n               index >= current.minIndex &&\n               index < current.maxIndex && (\n-                <Link to={`detail/phimbo/${index}`}>\n-                  <MovieItem\n-                    onClick={handleClickItem}\n-                    item={item}\n-                    typemovie={\"Phim bộ\"}\n-                    slide={false}\n-                  />\n-                </Link>\n+                <MovieItem\n+                  onClick={handleClickItem}\n+                  key={index}\n+                  id={index}\n+                  item={item}\n+                  typemovie={\"Phim bộ\"}\n+                />\n               )\n             );\n           })\n         ) : (\n"
+                },
+                {
+                    "date": 1651766048370,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,10 +20,9 @@\n   const { setMovie } = useContext(UserContext);\n   const navigate = useNavigate();\n \n   const handleClickItem = (id, keyid) => {\n-    setMovie(data.data.phim.phimbo[id]);\n-    navigate(\"/detail\");\n+    navigate(`detail/${keyid}/${id}`);\n   };\n   const pageSize = 30;\n   const [current, setCurrent] = useState({\n     minIndex: 0,\n"
+                },
+                {
+                    "date": 1651766060109,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,9 @@\n /** @format */\n import { Empty, Pagination } from \"antd\";\n-import React, { useContext, useState } from \"react\";\n+import React, { useState } from \"react\";\n import { useNavigate } from \"react-router-dom\";\n import styled from \"styled-components\";\n-import { UserContext } from \"../../../../context/itemmovie-context\";\n import MovieItem from \"../../Components/MovieItem\";\n const MovieListContainer = styled.div`\n   display: flex;\n   flex-wrap: wrap;\n@@ -16,9 +15,8 @@\n   max-width: 1300px;\n   margin: 0 auto;\n `;\n const SeriesMovie = data => {\n-  const { setMovie } = useContext(UserContext);\n   const navigate = useNavigate();\n \n   const handleClickItem = (id, keyid) => {\n     navigate(`detail/${keyid}/${id}`);\n"
+                },
+                {
+                    "date": 1651766101857,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,8 +50,9 @@\n                 <MovieItem\n                   onClick={handleClickItem}\n                   key={index}\n                   id={index}\n+                  keyid='phimbo'\n                   item={item}\n                   typemovie={\"Phim bộ\"}\n                 />\n               )\n"
+                },
+                {
+                    "date": 1651766219760,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,10 @@\n const SeriesMovie = data => {\n   const navigate = useNavigate();\n \n   const handleClickItem = (id, keyid) => {\n-    navigate(`detail/${keyid}/${id}`);\n+    console.log(keyid);\n+    // navigate(`detail/${keyid}/${id}`);\n   };\n   const pageSize = 30;\n   const [current, setCurrent] = useState({\n     minIndex: 0,\n"
+                },
+                {
+                    "date": 1651766248296,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,10 +18,9 @@\n const SeriesMovie = data => {\n   const navigate = useNavigate();\n \n   const handleClickItem = (id, keyid) => {\n-    console.log(keyid);\n-    // navigate(`detail/${keyid}/${id}`);\n+    navigate(`detail/${keyid}/${id}`);\n   };\n   const pageSize = 30;\n   const [current, setCurrent] = useState({\n     minIndex: 0,\n"
+                },
+                {
+                    "date": 1651766262038,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n const SeriesMovie = data => {\n   const navigate = useNavigate();\n \n   const handleClickItem = (id, keyid) => {\n-    navigate(`detail/${keyid}/${id}`);\n+    navigate(`/detail/${keyid}/${id}`);\n   };\n   const pageSize = 30;\n   const [current, setCurrent] = useState({\n     minIndex: 0,\n"
                 }
             ],
             "date": 1651376975302,

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 109,
+            "activePatchIndex": 143,
             "patches": [
                 {
                     "date": 1651362513609,
@@ -444,6 +444,142 @@
                 {
                     "date": 1651589289768,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -73,15 +73,9 @@\n     maxIndex: pageSize,\n     current: 1,\n   });\n   const { setMovie } = useContext(UserContext);\n-  const merge = () => {\n-    let datatemp = [];\n-    for (let property in data.phim) {\n-      datatemp.push(...data.phim[property]);\n-    }\n-    return datatemp;\n-  };\n+\n   const onChange = page => {\n     setCurrent(prev => {\n       return {\n         ...prev,\n"
+                },
+                {
+                    "date": 1651743564492,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import \"antd/dist/antd.css\";\n import { Pagination } from \"antd\";\n import styled from \"styled-components\";\n import MovieItem from \"../../Components/MovieItem\";\n-import { useNavigate } from \"react-router-dom\";\n+import { Outlet, useNavigate } from \"react-router-dom\";\n import { UserContext } from \"../../../../context/itemmovie-context\";\n import { Swiper, SwiperSlide } from \"swiper/react\";\n import {\n   Navigation,\n@@ -155,8 +155,9 @@\n         showSizeChanger={false}\n         size={\"big\"}\n         style={{ textAlign: \"right\", marginRight: \"5%\", marginTop: \"15px\" }}\n       />\n+      <Outlet/>\n     </Container>\n   );\n };\n \n"
+                },
+                {
+                    "date": 1651743662696,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -86,9 +86,9 @@\n     });\n   };\n   const handleClickItem = (id, keyid) => {\n     setMovie(data.phim[keyid][id]);\n-    navigate(\"/detail\");\n+    navigate(\":detailId\");\n   };\n   useEffect(() => {\n     const columns = () => {\n       if (window.innerWidth < 739) {\n"
+                },
+                {
+                    "date": 1651743709227,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -109,8 +109,9 @@\n     return () => window.removeEventListener(\"resize\", columns);\n   }, []);\n   return (\n     <Container>\n+      <Outlet/>\n       {keyvalue.map((item, index) => {\n         const { key, title } = item;\n         return (\n           <div key={key}>\n@@ -155,9 +156,8 @@\n         showSizeChanger={false}\n         size={\"big\"}\n         style={{ textAlign: \"right\", marginRight: \"5%\", marginTop: \"15px\" }}\n       />\n-      <Outlet/>\n     </Container>\n   );\n };\n \n"
+                },
+                {
+                    "date": 1651743797140,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -86,9 +86,9 @@\n     });\n   };\n   const handleClickItem = (id, keyid) => {\n     setMovie(data.phim[keyid][id]);\n-    navigate(\":detailId\");\n+    navigate(`/${id}`);\n   };\n   useEffect(() => {\n     const columns = () => {\n       if (window.innerWidth < 739) {\n"
+                },
+                {
+                    "date": 1651743844111,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -86,9 +86,9 @@\n     });\n   };\n   const handleClickItem = (id, keyid) => {\n     setMovie(data.phim[keyid][id]);\n-    navigate(`/${id}`);\n+    navigate(`/detail/${id}`);\n   };\n   useEffect(() => {\n     const columns = () => {\n       if (window.innerWidth < 739) {\n"
+                },
+                {
+                    "date": 1651753269104,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -86,9 +86,9 @@\n     });\n   };\n   const handleClickItem = (id, keyid) => {\n     setMovie(data.phim[keyid][id]);\n-    navigate(`/detail/${id}`);\n+    navigate(`${id}`);\n   };\n   useEffect(() => {\n     const columns = () => {\n       if (window.innerWidth < 739) {\n"
+                },
+                {
+                    "date": 1651753286859,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -86,9 +86,9 @@\n     });\n   };\n   const handleClickItem = (id, keyid) => {\n     setMovie(data.phim[keyid][id]);\n-    navigate(`${id}`);\n+    navigate(`/detail/${id}`);\n   };\n   useEffect(() => {\n     const columns = () => {\n       if (window.innerWidth < 739) {\n"
+                },
+                {
+                    "date": 1651753337757,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -86,9 +86,9 @@\n     });\n   };\n   const handleClickItem = (id, keyid) => {\n     setMovie(data.phim[keyid][id]);\n-    navigate(`/detail/${id}`);\n+    // navigate(`/detail/${id}`);\n   };\n   useEffect(() => {\n     const columns = () => {\n       if (window.innerWidth < 739) {\n"
+                },
+                {
+                    "date": 1651753446976,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import \"antd/dist/antd.css\";\n import { Pagination } from \"antd\";\n import styled from \"styled-components\";\n import MovieItem from \"../../Components/MovieItem\";\n-import { Outlet, useNavigate } from \"react-router-dom\";\n+import { Link, Outlet, useNavigate } from \"react-router-dom\";\n import { UserContext } from \"../../../../context/itemmovie-context\";\n import { Swiper, SwiperSlide } from \"swiper/react\";\n import {\n   Navigation,\n@@ -130,16 +130,18 @@\n                     return (\n                       index >= current.minIndex &&\n                       index < current.maxIndex && (\n                         <SwiperSlide key={index}>\n+                          <Link to={`${index}/${item.title}`}>\n                           <MovieItem\n                             onClick={handleClickItem}\n                             id={index}\n                             keyid={key}\n                             item={item}\n                             typemovie={title}\n                             slide={true}\n                           />\n+                          </Link>\n                         </SwiperSlide>\n                       )\n                     );\n                   })}\n"
+                },
+                {
+                    "date": 1651760719922,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -109,9 +109,8 @@\n     return () => window.removeEventListener(\"resize\", columns);\n   }, []);\n   return (\n     <Container>\n-      <Outlet/>\n       {keyvalue.map((item, index) => {\n         const { key, title } = item;\n         return (\n           <div key={key}>\n"
+                },
+                {
+                    "date": 1651760741252,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -157,8 +157,9 @@\n         showSizeChanger={false}\n         size={\"big\"}\n         style={{ textAlign: \"right\", marginRight: \"5%\", marginTop: \"15px\" }}\n       />\n+      <Outlet/>\n     </Container>\n   );\n };\n \n"
+                },
+                {
+                    "date": 1651761212302,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -109,8 +109,9 @@\n     return () => window.removeEventListener(\"resize\", columns);\n   }, []);\n   return (\n     <Container>\n+      <Outlet/>\n       {keyvalue.map((item, index) => {\n         const { key, title } = item;\n         return (\n           <div key={key}>\n@@ -157,9 +158,8 @@\n         showSizeChanger={false}\n         size={\"big\"}\n         style={{ textAlign: \"right\", marginRight: \"5%\", marginTop: \"15px\" }}\n       />\n-      <Outlet/>\n     </Container>\n   );\n };\n \n"
+                },
+                {
+                    "date": 1651761306871,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -130,9 +130,9 @@\n                     return (\n                       index >= current.minIndex &&\n                       index < current.maxIndex && (\n                         <SwiperSlide key={index}>\n-                          <Link to={`${index}/${item.title}`}>\n+                          <Link to={index}>\n                           <MovieItem\n                             onClick={handleClickItem}\n                             id={index}\n                             keyid={key}\n"
+                },
+                {
+                    "date": 1651761396518,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -114,8 +114,9 @@\n       {keyvalue.map((item, index) => {\n         const { key, title } = item;\n         return (\n           <div key={key}>\n+            <Outlet/>\n             <Title className='title'>{item.title}</Title>\n             <Swiper\n               spaceBetween={1}\n               modules={[Navigation, Paginationn, Autoplay, Scrollbar]}\n"
+                },
+                {
+                    "date": 1651761492543,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -131,9 +131,9 @@\n                     return (\n                       index >= current.minIndex &&\n                       index < current.maxIndex && (\n                         <SwiperSlide key={index}>\n-                          <Link to={index}>\n+                          <Link to={`${index}`}>\n                           <MovieItem\n                             onClick={handleClickItem}\n                             id={index}\n                             keyid={key}\n"
+                },
+                {
+                    "date": 1651762140501,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -131,9 +131,9 @@\n                     return (\n                       index >= current.minIndex &&\n                       index < current.maxIndex && (\n                         <SwiperSlide key={index}>\n-                          <Link to={`${index}`}>\n+                          <Link to={`detail/${index}`}>\n                           <MovieItem\n                             onClick={handleClickItem}\n                             id={index}\n                             keyid={key}\n"
+                },
+                {
+                    "date": 1651762417471,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -131,9 +131,9 @@\n                     return (\n                       index >= current.minIndex &&\n                       index < current.maxIndex && (\n                         <SwiperSlide key={index}>\n-                          <Link to={`detail/${index}`}>\n+                          <Link to={`detail/${key}/${index}`}>\n                           <MovieItem\n                             onClick={handleClickItem}\n                             id={index}\n                             keyid={key}\n"
+                },
+                {
+                    "date": 1651762689310,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import \"antd/dist/antd.css\";\n import { Pagination } from \"antd\";\n import styled from \"styled-components\";\n import MovieItem from \"../../Components/MovieItem\";\n-import { Link, Outlet, useNavigate } from \"react-router-dom\";\n+import { Link, Outlet, useNavigate, useParams } from \"react-router-dom\";\n import { UserContext } from \"../../../../context/itemmovie-context\";\n import { Swiper, SwiperSlide } from \"swiper/react\";\n import {\n   Navigation,\n@@ -65,9 +65,10 @@\n \n const HomePage = ({ data }) => {\n   const pageSize = 18;\n   const [column, setColumn] = useState(5);\n-  let navigate = useNavigate();\n+  const params = useParams();\n+  console.log(params);\n   const [current, setCurrent] = useState({\n     data: data.phim,\n     minIndex: 0,\n     maxIndex: pageSize,\n"
+                },
+                {
+                    "date": 1651763227792,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -66,9 +66,9 @@\n const HomePage = ({ data }) => {\n   const pageSize = 18;\n   const [column, setColumn] = useState(5);\n   const params = useParams();\n-  console.log(params);\n+  \n   const [current, setCurrent] = useState({\n     data: data.phim,\n     minIndex: 0,\n     maxIndex: pageSize,\n@@ -85,11 +85,14 @@\n         maxIndex: page * pageSize,\n       };\n     });\n   };\n-  const handleClickItem = (id, keyid) => {\n-    setMovie(data.phim[keyid][id]);\n-    // navigate(`/detail/${id}`);\n+  const handleClickItem = () => {\n+    if(params){\n+      let id = Number.parseInt(params.id);\n+      console.log(id);\n+      // setMovie(data.phim[keyid][id]);\n+    }\n   };\n   useEffect(() => {\n     const columns = () => {\n       if (window.innerWidth < 739) {\n"
+                },
+                {
+                    "date": 1651763251907,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -87,10 +87,10 @@\n     });\n   };\n   const handleClickItem = () => {\n     if(params){\n-      let id = Number.parseInt(params.id);\n-      console.log(id);\n+      // let id = Number.parseInt(params.id);\n+      console.log(params.id);\n       // setMovie(data.phim[keyid][id]);\n     }\n   };\n   useEffect(() => {\n"
+                },
+                {
+                    "date": 1651763264037,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -88,9 +88,9 @@\n   };\n   const handleClickItem = () => {\n     if(params){\n       // let id = Number.parseInt(params.id);\n-      console.log(params.id);\n+      console.log(params);\n       // setMovie(data.phim[keyid][id]);\n     }\n   };\n   useEffect(() => {\n"
+                },
+                {
+                    "date": 1651763334491,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -85,13 +85,11 @@\n         maxIndex: page * pageSize,\n       };\n     });\n   };\n-  const handleClickItem = () => {\n+  const handleClickItem = (id, keyid) => {\n     if(params){\n-      // let id = Number.parseInt(params.id);\n-      console.log(params);\n-      // setMovie(data.phim[keyid][id]);\n+      setMovie(data.phim[keyid][id]);\n     }\n   };\n   useEffect(() => {\n     const columns = () => {\n"
+                },
+                {
+                    "date": 1651763380275,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -66,9 +66,9 @@\n const HomePage = ({ data }) => {\n   const pageSize = 18;\n   const [column, setColumn] = useState(5);\n   const params = useParams();\n-  \n+  console.log(params)\n   const [current, setCurrent] = useState({\n     data: data.phim,\n     minIndex: 0,\n     maxIndex: pageSize,\n"
+                },
+                {
+                    "date": 1651763406042,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -66,9 +66,8 @@\n const HomePage = ({ data }) => {\n   const pageSize = 18;\n   const [column, setColumn] = useState(5);\n   const params = useParams();\n-  console.log(params)\n   const [current, setCurrent] = useState({\n     data: data.phim,\n     minIndex: 0,\n     maxIndex: pageSize,\n"
+                },
+                {
+                    "date": 1651763439676,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -85,11 +85,9 @@\n       };\n     });\n   };\n   const handleClickItem = (id, keyid) => {\n-    if(params){\n       setMovie(data.phim[keyid][id]);\n-    }\n   };\n   useEffect(() => {\n     const columns = () => {\n       if (window.innerWidth < 739) {\n"
+                },
+                {
+                    "date": 1651764643321,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -85,9 +85,9 @@\n       };\n     });\n   };\n   const handleClickItem = (id, keyid) => {\n-      setMovie(data.phim[keyid][id]);\n+      // setMovie(data.phim[keyid][id]);\n   };\n   useEffect(() => {\n     const columns = () => {\n       if (window.innerWidth < 739) {\n"
+                },
+                {
+                    "date": 1651764665488,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -85,9 +85,9 @@\n       };\n     });\n   };\n   const handleClickItem = (id, keyid) => {\n-      // setMovie(data.phim[keyid][id]);\n+\n   };\n   useEffect(() => {\n     const columns = () => {\n       if (window.innerWidth < 739) {\n"
+                },
+                {
+                    "date": 1651764711305,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -133,10 +133,8 @@\n                         <SwiperSlide key={index}>\n                           <Link to={`detail/${key}/${index}`}>\n                           <MovieItem\n                             onClick={handleClickItem}\n-                            id={index}\n-                            keyid={key}\n                             item={item}\n                             typemovie={title}\n                             slide={true}\n                           />\n"
+                },
+                {
+                    "date": 1651764756204,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -132,9 +132,8 @@\n                       index < current.maxIndex && (\n                         <SwiperSlide key={index}>\n                           <Link to={`detail/${key}/${index}`}>\n                           <MovieItem\n-                            onClick={handleClickItem}\n                             item={item}\n                             typemovie={title}\n                             slide={true}\n                           />\n"
+                },
+                {
+                    "date": 1651764768502,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -132,8 +132,9 @@\n                       index < current.maxIndex && (\n                         <SwiperSlide key={index}>\n                           <Link to={`detail/${key}/${index}`}>\n                           <MovieItem\n+                            onClick={handleClickItem}\n                             item={item}\n                             typemovie={title}\n                             slide={true}\n                           />\n"
+                },
+                {
+                    "date": 1651764800504,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -72,9 +72,8 @@\n     minIndex: 0,\n     maxIndex: pageSize,\n     current: 1,\n   });\n-  const { setMovie } = useContext(UserContext);\n \n   const onChange = page => {\n     setCurrent(prev => {\n       return {\n"
+                },
+                {
+                    "date": 1651764830902,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n import \"antd/dist/antd.css\";\n import { Pagination } from \"antd\";\n import styled from \"styled-components\";\n import MovieItem from \"../../Components/MovieItem\";\n-import { Link, Outlet, useNavigate, useParams } from \"react-router-dom\";\n+import { Link, Outlet} from \"react-router-dom\";\n import { UserContext } from \"../../../../context/itemmovie-context\";\n import { Swiper, SwiperSlide } from \"swiper/react\";\n import {\n   Navigation,\n@@ -65,9 +65,8 @@\n \n const HomePage = ({ data }) => {\n   const pageSize = 18;\n   const [column, setColumn] = useState(5);\n-  const params = useParams();\n   const [current, setCurrent] = useState({\n     data: data.phim,\n     minIndex: 0,\n     maxIndex: pageSize,\n"
+                },
+                {
+                    "date": 1651765070514,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,12 @@\n /** @format */\n \n-import React, { useContext, useState, useEffect } from \"react\";\n+import React, {useState, useEffect } from \"react\";\n import \"antd/dist/antd.css\";\n import { Pagination } from \"antd\";\n import styled from \"styled-components\";\n import MovieItem from \"../../Components/MovieItem\";\n import { Link, Outlet} from \"react-router-dom\";\n-import { UserContext } from \"../../../../context/itemmovie-context\";\n import { Swiper, SwiperSlide } from \"swiper/react\";\n import {\n   Navigation,\n   Pagination as Paginationn,\n"
+                },
+                {
+                    "date": 1651766760007,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,12 @@\n /** @format */\n \n-import React, {useState, useEffect } from \"react\";\n+import React, { useState, useEffect } from \"react\";\n import \"antd/dist/antd.css\";\n import { Pagination } from \"antd\";\n import styled from \"styled-components\";\n import MovieItem from \"../../Components/MovieItem\";\n-import { Link, Outlet} from \"react-router-dom\";\n+import { Link, Outlet } from \"react-router-dom\";\n import { Swiper, SwiperSlide } from \"swiper/react\";\n import {\n   Navigation,\n   Pagination as Paginationn,\n@@ -81,11 +81,9 @@\n         maxIndex: page * pageSize,\n       };\n     });\n   };\n-  const handleClickItem = (id, keyid) => {\n-\n-  };\n+  const handleClickItem = (id, keyid) => {};\n   useEffect(() => {\n     const columns = () => {\n       if (window.innerWidth < 739) {\n         setColumn(1);\n@@ -105,14 +103,14 @@\n     return () => window.removeEventListener(\"resize\", columns);\n   }, []);\n   return (\n     <Container>\n-      <Outlet/>\n+      <Outlet />\n       {keyvalue.map((item, index) => {\n         const { key, title } = item;\n         return (\n           <div key={key}>\n-            <Outlet/>\n+            <Outlet />\n             <Title className='title'>{item.title}</Title>\n             <Swiper\n               spaceBetween={1}\n               modules={[Navigation, Paginationn, Autoplay, Scrollbar]}\n@@ -128,14 +126,14 @@\n                       index >= current.minIndex &&\n                       index < current.maxIndex && (\n                         <SwiperSlide key={index}>\n                           <Link to={`detail/${key}/${index}`}>\n-                          <MovieItem\n-                            onClick={handleClickItem}\n-                            item={item}\n-                            typemovie={title}\n-                            slide={true}\n-                          />\n+                            <MovieItem\n+                              onClick={handleClickItem}\n+                              item={item}\n+                              typemovie={title}\n+                              slide={true}\n+                            />\n                           </Link>\n                         </SwiperSlide>\n                       )\n                     );\n"
                 }
             ],
             "date": 1651362513609,

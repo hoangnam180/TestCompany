@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 6,
+            "activePatchIndex": 8,
             "patches": [
                 {
                     "date": 1651375907888,
@@ -32,6 +32,14 @@
                 {
                     "date": 1651376218986,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n   const handleClickItem = (id, keyid) => {\n     setMovie(data.data.phim.phimchieurap[id]);\n     navigate(\"/detail\");\n   };\n-  const pageSize = 30;\n+  const pageSize = 28;\n   const [current, setCurrent] = useState({\n     minIndex: 0,\n     maxIndex: pageSize,\n     current: 1,\n"
+                },
+                {
+                    "date": 1651766375777,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,13 +15,11 @@\n   max-width: 1300px;\n   margin: 0 auto;\n `;\n const MovieTheaters = data => {\n-  const {setMovie } = useContext(UserContext);\n-  const navigate = useNavigate()\n+  const navigate = useNavigate();\n   const handleClickItem = (id, keyid) => {\n-    setMovie(data.data.phim.phimchieurap[id]);\n-    navigate(\"/detail\");\n+    navigate(`/detail/${keyid}/${id}`);\n   };\n   const pageSize = 28;\n   const [current, setCurrent] = useState({\n     minIndex: 0,\n@@ -39,27 +37,28 @@\n     });\n   };\n   return (\n     <Container>\n-    <MovieListContainer className='row'>\n-      {data &&\n-        data.data &&\n-        data.data.phim.phimchieurap.map((item, index) => {\n-          \n-          return (\n-            index >= current.minIndex &&\n-            index < current.maxIndex && (\n-            <MovieItem\n-              onClick={handleClickItem}\n-              key={index}\n-              id={index}\n-              item={item}\n-              typemovie={\"Phim chiếu rạp\"}\n-            />)\n-          );\n-        })}\n-    </MovieListContainer>\n-    <Pagination\n+      <MovieListContainer className='row'>\n+        {data &&\n+          data.data &&\n+          data.data.phim.phimchieurap.map((item, index) => {\n+            return (\n+              index >= current.minIndex &&\n+              index < current.maxIndex && (\n+                <MovieItem\n+                  onClick={handleClickItem}\n+                  key={index}\n+                  id={index}\n+                  keyid='phimchieurap'\n+                  item={item}\n+                  typemovie={\"Phim chiếu rạp\"}\n+                />\n+              )\n+            );\n+          })}\n+      </MovieListContainer>\n+      <Pagination\n         pageSize={pageSize}\n         current={current.current}\n         total={data.data.phim.phimchieurap.length}\n         onChange={onChange}\n"
+                },
+                {
+                    "date": 1651766383585,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,9 @@\n /** @format */\n \n import MovieItem from \"../../Components/MovieItem\";\n import styled from \"styled-components\";\n-import { useContext, useState } from \"react\";\n-import { UserContext } from \"../../../../context/itemmovie-context\";\n+import { useState } from \"react\";\n import { useNavigate } from \"react-router-dom\";\n import { Pagination } from \"antd\";\n const MovieListContainer = styled.div`\n   display: flex;\n"
                 }
             ],
             "date": 1651375907888,

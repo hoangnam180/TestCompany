@@ -1,7 +1,7 @@
 /** @format */
 import { Empty, Pagination } from "antd";
 import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { UserContext } from "../../../../context/itemmovie-context";
 import MovieItem from "../../Components/MovieItem";
@@ -17,7 +17,7 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 const Search = data => {
-  const { setMovie, inputSearch } = useContext(UserContext);
+  const { inputSearch } = useContext(UserContext);
   const navigate = useNavigate();
 
   const merge = () => {
@@ -39,8 +39,7 @@ const Search = data => {
     });
 
   const handleClickItem = id => {
-    setMovie(filterData[id]);
-    navigate("/detail");
+    navigate(`/search/${id}`);
   };
   const pageSize = window.innerWidth < 1200 ? 28 : 30;
   const [current, setCurrent] = useState({
@@ -71,7 +70,7 @@ const Search = data => {
                   key={index}
                   id={index}
                   item={item}
-                  typemovie={"Phim bộ"}
+                  typemovie={"Tổng hợp"}
                 />
               )
             );
@@ -89,6 +88,7 @@ const Search = data => {
         size={"big"}
         style={{ textAlign: "right", marginRight: "5%", marginTop: "15px" }}
       />
+      <Outlet />
     </Container>
   );
 };

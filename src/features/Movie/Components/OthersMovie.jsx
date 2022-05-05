@@ -1,7 +1,8 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
+import { UserContext } from "../../../context/itemmovie-context";
 import Iframe from "react-iframe";
 import { Empty } from "antd";
 import { useParams } from "react-router-dom";
@@ -156,11 +157,29 @@ const DetaiPageContainer = styled.div`
     }
   }
 `;
-const DetaiPage = ({ data }) => {
+const OthersMovie = ({ data }) => {
+  const { inputSearch } = useContext(UserContext);
+  const merge = () => {
+    let datatemp = [];
+    for (let property in data?.phim) {
+      datatemp.push(...data?.phim[property]);
+    }
+    return datatemp;
+  };
+  const merged = merge();
+  const filterData =
+    merged &&
+    merged.filter(item => {
+      if (inputSearch === "") {
+        return item;
+      } else {
+        return item.title.toLowerCase().includes(inputSearch);
+      }
+    });
   //get useParam on url get data id
   const params = useParams();
-  const id = params && Number.parseInt(params.detailId);
-  const movie = params && data.phim[params.key][id];
+  const id = params && Number.parseInt(params.id);
+  const movie = params && filterData[id];
   const urldefault =
     movie && movie.episode && movie.episode.length > 0 && movie.episode[0]?.url;
   const [urlMovie, setUrlMovie] = useState(urldefault);
@@ -208,4 +227,4 @@ const DetaiPage = ({ data }) => {
   );
 };
 
-export default DetaiPage;
+export default OthersMovie;

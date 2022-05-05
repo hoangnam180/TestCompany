@@ -2,19 +2,13 @@
 
 import "./App.css";
 import Header from "./Components/header/Header";
-import HomePage from "./features/Movie/Page/Home";
-import DetailPage from "./features/Movie/Components/DetailPage";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Spin } from "antd";
 import Footer from "./Components/footer/Footer";
-import SeriesMovie from "./features/Movie/Page/SeriesMovie/SeriesMovie";
-import MovieTheaters from "./features/Movie/Page/MovieTheaters/MovieTheaters";
-import Cartoon from "./features/Movie/Page/Cartoon/Cartoon";
-import OddMovie from "./features/Movie/Page/OddMovie/OddMovie";
 import { UserContext } from "./context/itemmovie-context";
-import Search from "./features/Movie/Page/Search/Search";
+import { publicRoutes } from "./routes";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -47,16 +41,39 @@ function App() {
         </div>
       ) : (
         <Routes>
-          <Route path='/' element={<HomePage data={data} />} />
-          <Route path='/detail/*' element={<DetailPage />} />
-          <Route path='/phimbo/*' element={<SeriesMovie data={data} />} />
+          {publicRoutes.map((route, index) => {
+            const Page = route.component;
+            return (
+              <Route
+                key={index}
+                path={route.path}
+                element={<Page data={data && data} />}
+              />
+            );
+          })}
+          {/* <Route path='/' element={<Home data={data && data} />} />
+          <Route
+            path='/phimbo/*'
+            element={<SeriesMovie data={data && data} />}
+          />
           <Route
             path='/phimchieurap/*'
-            element={<MovieTheaters data={data} />}
+            element={<MovieTheaters data={data && data} />}
           />
-          <Route path='/phimhoathinh/*' element={<Cartoon data={data} />} />
-          <Route path='/phimle/*' element={<OddMovie data={data} />} />
-          <Route path='/search' element={<Search data={data} />} />
+          <Route
+            path='/phimhoathinh/*'
+            element={<Cartoon data={data && data} />}
+          />
+          <Route path='/phimle/*' element={<OddMovie data={data && data} />} />
+          <Route
+            path='/detail/:key/:detailId'
+            element={<DetailPage data={data && data} />}
+          />
+          <Route path='/search' element={<Search data={data && data} />} />
+          <Route
+            path='/search/:id'
+            element={<OthersMovie data={data && data} />}
+          /> */}
         </Routes>
       )}
       <Footer />
