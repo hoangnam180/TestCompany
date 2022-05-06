@@ -5,6 +5,9 @@ import styled from "styled-components";
 import Logo from "../../Assets/logo/popcorn.png";
 
 const FooterWrap = styled.div`
+  .footer__title {
+    color: #989696;
+  }
   display: flex;
   flex-flow: row wrap;
   padding: 30px 30px 20px 30px;
@@ -141,7 +144,12 @@ const FooterWrap = styled.div`
       margin-left: auto;
     }
   }
-
+  @media only screen and (max-width: 735px) {
+    .footer__title {
+      font-size: 1.1rem;
+      margin-top: 5px;
+    }
+  }
   @media screen and (min-width: 40.375em) {
     .footer__nav > * {
       flex: 1;
@@ -177,8 +185,8 @@ const Footer = () => {
               </h1>
             </li>
 
-            <li>
-              <p href='#'>
+            <li className='footer__title'>
+              <p>
                 Copyright 2021 © Home19.net Xem phim mới miễn phí nhanh chất
                 lượng cao. Xem Phim online Việt Sub, Thuyết minh, lồng tiếng
                 chất lượng HD. Xem phim nhanh online chất lượng cao
@@ -187,8 +195,8 @@ const Footer = () => {
           </ul>
         </li>
 
-        <li className='nav__item'>
-          <p href='#'>Email liên hệ: ezphimmoi.net@gmail.com</p>
+        <li className='footer__title'>
+          <p>Email liên hệ: ezphimmoi.net@gmail.com</p>
         </li>
       </ul>
     </FooterWrap>

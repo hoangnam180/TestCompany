@@ -61,6 +61,27 @@ const HeaderWrapper = styled.div`
     outline: none;
     font-size: 1.6rem;
   }
+  @media only screen and (max-width: 1023px) {
+    .header_searchbox {
+      padding: 0.5rem;
+      input {
+        outline: none;
+      }
+    }
+  }
+  @media only screen and (max-width: 735px) {
+    .header_title {
+      font-size: 2rem;
+    }
+    .header_logo {
+      width: 4.2rem;
+      height: 4rem;
+      margin: 0 0.5rem;
+    }
+    .header_searchbox {
+      padding: 0.1rem;
+    }
+  }
 `;
 const Menu = styled.div`
   padding: 0 2rem;
@@ -87,6 +108,24 @@ const Menu = styled.div`
       background-color: #eaeaea;
       color: #333;
       cursor: pointer;
+    }
+  }
+  @media only screen and (max-width: 1023px) {
+    .navigation_link {
+      width: auto;
+    }
+  }
+  @media only screen and (max-width: 735px) {
+    .navigation {
+      width: 100%;
+      overflow-x: auto;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+    .navigation_link {
+      width: 12rem;
+      font-size: 1.5rem;
     }
   }
 `;

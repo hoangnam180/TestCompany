@@ -42,6 +42,10 @@ const Title = styled.h1`
     top: 100%;
     background-color: #fff;
   }
+  @media only screen and (max-width: 735px) {
+    font-size: 2.2rem;
+    padding: 0 1rem;
+  }
 `;
 const keyvalue = [
   {

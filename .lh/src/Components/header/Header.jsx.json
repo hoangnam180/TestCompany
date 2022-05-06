@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 58,
+            "activePatchIndex": 83,
             "patches": [
                 {
                     "date": 1651322569731,
@@ -240,6 +240,106 @@
                 {
                     "date": 1651768631800,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -99,9 +99,8 @@\n   const handleSearch = e => {\n     let result = e.target.value.toLowerCase();\n     if (result === \"\") {\n       setInputSearch(\"\");\n-      navigate()\n     }\n     setInput(result);\n   };\n   //click on search\n"
+                },
+                {
+                    "date": 1651796393539,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,13 @@\n import { NavLink, useNavigate } from \"react-router-dom\";\n import { useContext, useState } from \"react\";\n import { UserContext } from \"../../context/itemmovie-context\";\n const HeaderWrapper = styled.div`\n+  @media only screen and (min-width: 740px) and (max-width: 1023px) {\n+    .navigation_link {\n+      width: unset;\n+    }\n+  }\n   display: flex;\n   align-items: center;\n   background-color: black;\n   padding: 1rem;\n"
+                },
+                {
+                    "date": 1651796429640,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,13 +7,8 @@\n import { NavLink, useNavigate } from \"react-router-dom\";\n import { useContext, useState } from \"react\";\n import { UserContext } from \"../../context/itemmovie-context\";\n const HeaderWrapper = styled.div`\n-  @media only screen and (min-width: 740px) and (max-width: 1023px) {\n-    .navigation_link {\n-      width: unset;\n-    }\n-  }\n   display: flex;\n   align-items: center;\n   background-color: black;\n   padding: 1rem;\n@@ -67,8 +62,13 @@\n     font-size: 1.6rem;\n   }\n `;\n const Menu = styled.div`\n+  @media only screen and (min-width: 740px) and (max-width: 1023px) {\n+    .navigation_link {\n+      width: unset;\n+    }\n+  }\n   padding: 0 2rem;\n   padding-top: 2rem;\n   .navigation {\n     list-style: none;\n"
+                },
+                {
+                    "date": 1651796448503,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -64,9 +64,9 @@\n `;\n const Menu = styled.div`\n   @media only screen and (min-width: 740px) and (max-width: 1023px) {\n     .navigation_link {\n-      width: unset;\n+      width: auto;\n     }\n   }\n   padding: 0 2rem;\n   padding-top: 2rem;\n"
+                },
+                {
+                    "date": 1651796493172,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -62,13 +62,8 @@\n     font-size: 1.6rem;\n   }\n `;\n const Menu = styled.div`\n-  @media only screen and (min-width: 740px) and (max-width: 1023px) {\n-    .navigation_link {\n-      width: auto;\n-    }\n-  }\n   padding: 0 2rem;\n   padding-top: 2rem;\n   .navigation {\n     list-style: none;\n@@ -93,8 +88,13 @@\n       color: #333;\n       cursor: pointer;\n     }\n   }\n+  @media only screen and (min-width: 740px) and (max-width: 1023px) {\n+    .navigation_link {\n+      width: auto;\n+    }\n+  }\n `;\n \n const Header = props => {\n   let navigate = useNavigate();\n"
+                },
+                {
+                    "date": 1651796500919,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,9 +90,9 @@\n     }\n   }\n   @media only screen and (min-width: 740px) and (max-width: 1023px) {\n     .navigation_link {\n-      width: auto;\n+      width: auto !important;\n     }\n   }\n `;\n \n"
+                },
+                {
+                    "date": 1651796510214,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,9 +90,9 @@\n     }\n   }\n   @media only screen and (min-width: 740px) and (max-width: 1023px) {\n     .navigation_link {\n-      width: auto !important;\n+      width: auto;\n     }\n   }\n `;\n \n"
+                },
+                {
+                    "date": 1651796576945,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -88,9 +88,9 @@\n       color: #333;\n       cursor: pointer;\n     }\n   }\n-  @media only screen and (min-width: 740px) and (max-width: 1023px) {\n+  @media only screen and (max-width: 1200px) {\n     .navigation_link {\n       width: auto;\n     }\n   }\n"
+                },
+                {
+                    "date": 1651796703438,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -60,8 +60,25 @@\n     border: none;\n     outline: none;\n     font-size: 1.6rem;\n   }\n+  @media only screen and (max-width: 1023px) {\n+    .navigation_link {\n+      .header_searchbox {\n+        display: flex;\n+        align-items: center;\n+        padding: 1rem;\n+        background-color: white;\n+        border-radius: 0.6rem;\n+        margin-left: 2rem;\n+        width: 50%;\n+        overflow: hidden;\n+        input {\n+          outline: none;\n+        }\n+      }\n+    }\n+  }\n `;\n const Menu = styled.div`\n   padding: 0 2rem;\n   padding-top: 2rem;\n@@ -88,9 +105,9 @@\n       color: #333;\n       cursor: pointer;\n     }\n   }\n-  @media only screen and (max-width: 1200px) {\n+  @media only screen and (max-width: 1023px) {\n     .navigation_link {\n       width: auto;\n     }\n   }\n"
+                },
+                {
+                    "date": 1651796711362,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -65,9 +65,9 @@\n     .navigation_link {\n       .header_searchbox {\n         display: flex;\n         align-items: center;\n-        padding: 1rem;\n+        padding: 0.5rem;\n         background-color: white;\n         border-radius: 0.6rem;\n         margin-left: 2rem;\n         width: 50%;\n"
+                },
+                {
+                    "date": 1651796746119,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -61,21 +61,12 @@\n     outline: none;\n     font-size: 1.6rem;\n   }\n   @media only screen and (max-width: 1023px) {\n-    .navigation_link {\n-      .header_searchbox {\n-        display: flex;\n-        align-items: center;\n-        padding: 0.5rem;\n-        background-color: white;\n-        border-radius: 0.6rem;\n-        margin-left: 2rem;\n-        width: 50%;\n-        overflow: hidden;\n-        input {\n-          outline: none;\n-        }\n+    .header_searchbox {\n+      padding: 0.5rem;\n+      input {\n+        outline: none;\n       }\n     }\n   }\n `;\n"
+                },
+                {
+                    "date": 1651796801715,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -101,8 +101,13 @@\n     .navigation_link {\n       width: auto;\n     }\n   }\n+  @media only screen and (max-width: 735px) {\n+    .navigation_link {\n+      width: 10rem;\n+    }\n+  }\n `;\n \n const Header = props => {\n   let navigate = useNavigate();\n"
+                },
+                {
+                    "date": 1651796817982,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -103,9 +103,9 @@\n     }\n   }\n   @media only screen and (max-width: 735px) {\n     .navigation_link {\n-      width: 10rem;\n+      width: 12rem;\n     }\n   }\n `;\n \n"
+                },
+                {
+                    "date": 1651796823811,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -103,9 +103,9 @@\n     }\n   }\n   @media only screen and (max-width: 735px) {\n     .navigation_link {\n-      width: 12rem;\n+      width: 14rem;\n     }\n   }\n `;\n \n"
+                },
+                {
+                    "date": 1651796830590,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -103,9 +103,9 @@\n     }\n   }\n   @media only screen and (max-width: 735px) {\n     .navigation_link {\n-      width: 14rem;\n+      width: 15rem;\n     }\n   }\n `;\n \n"
+                },
+                {
+                    "date": 1651796837314,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -103,9 +103,9 @@\n     }\n   }\n   @media only screen and (max-width: 735px) {\n     .navigation_link {\n-      width: 15rem;\n+      width: 12rem;\n     }\n   }\n `;\n \n"
+                },
+                {
+                    "date": 1651796846787,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -104,8 +104,9 @@\n   }\n   @media only screen and (max-width: 735px) {\n     .navigation_link {\n       width: 12rem;\n+      font-size: 1rem;\n     }\n   }\n `;\n \n"
+                },
+                {
+                    "date": 1651796853670,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -104,9 +104,9 @@\n   }\n   @media only screen and (max-width: 735px) {\n     .navigation_link {\n       width: 12rem;\n-      font-size: 1rem;\n+      font-size: 1.5rem;\n     }\n   }\n `;\n \n"
+                },
+                {
+                    "date": 1651796885667,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -102,8 +102,13 @@\n       width: auto;\n     }\n   }\n   @media only screen and (max-width: 735px) {\n+    .navigation {\n+      list-style: none;\n+      display: flex;\n+      gap: 2rem;\n+    }\n     .navigation_link {\n       width: 12rem;\n       font-size: 1.5rem;\n     }\n"
+                },
+                {
+                    "date": 1651796918405,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -103,11 +103,10 @@\n     }\n   }\n   @media only screen and (max-width: 735px) {\n     .navigation {\n-      list-style: none;\n-      display: flex;\n-      gap: 2rem;\n+      width: 100%;\n+      overflow: -moz-hidden-unscrollable;\n     }\n     .navigation_link {\n       width: 12rem;\n       font-size: 1.5rem;\n"
+                },
+                {
+                    "date": 1651796948053,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -104,9 +104,9 @@\n   }\n   @media only screen and (max-width: 735px) {\n     .navigation {\n       width: 100%;\n-      overflow: -moz-hidden-unscrollable;\n+      overflow-x: auto;\n     }\n     .navigation_link {\n       width: 12rem;\n       font-size: 1.5rem;\n"
+                },
+                {
+                    "date": 1651797032513,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -105,8 +105,11 @@\n   @media only screen and (max-width: 735px) {\n     .navigation {\n       width: 100%;\n       overflow-x: auto;\n+      &::-webkit-scrollbar {\n+        display: none;\n+      }\n     }\n     .navigation_link {\n       width: 12rem;\n       font-size: 1.5rem;\n"
+                },
+                {
+                    "date": 1651797295191,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -68,8 +68,13 @@\n         outline: none;\n       }\n     }\n   }\n+  @media only screen and (max-width: 735px) {\n+    .header_title {\n+      font-size: rem;\n+    }\n+  }\n `;\n const Menu = styled.div`\n   padding: 0 2rem;\n   padding-top: 2rem;\n"
+                },
+                {
+                    "date": 1651797375512,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -70,10 +70,14 @@\n     }\n   }\n   @media only screen and (max-width: 735px) {\n     .header_title {\n-      font-size: rem;\n+      font-size: 2rem;\n     }\n+    .header_logo {\n+      width: 4.2rem;\n+      height: 4rem;\n+    }\n   }\n `;\n const Menu = styled.div`\n   padding: 0 2rem;\n"
+                },
+                {
+                    "date": 1651797408518,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -75,8 +75,9 @@\n     }\n     .header_logo {\n       width: 4.2rem;\n       height: 4rem;\n+      margin: 0 0.5rem;\n     }\n   }\n `;\n const Menu = styled.div`\n"
+                },
+                {
+                    "date": 1651797480273,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -77,8 +77,11 @@\n       width: 4.2rem;\n       height: 4rem;\n       margin: 0 0.5rem;\n     }\n+    .header_searchbox {\n+      padding: 0.1rem;\n+    }\n   }\n `;\n const Menu = styled.div`\n   padding: 0 2rem;\n"
                 }
             ],
             "date": 1651322569730,

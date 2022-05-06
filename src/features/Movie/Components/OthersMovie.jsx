@@ -20,6 +20,8 @@ const DetaiPageContainer = styled.div`
   }
   .title {
     color: white;
+    font-size: 2.5rem;
+    margin-top: 5px;
   }
   .wrap-title {
     display: flex;
@@ -154,6 +156,21 @@ const DetaiPageContainer = styled.div`
     &.other:hover {
       background-color: #f2a900;
       background-image: unset;
+    }
+  }
+  @media only screen and (max-width: 1023px) {
+    .title {
+      font-size: 1.8rem;
+    }
+  }
+  @media only screen and (max-width: 723px) {
+    .title {
+      font-size: 1.1rem;
+      max-width: 80%;
+      text-align: center;
+    }
+    .episode {
+      padding: 2px;
     }
   }
 `;

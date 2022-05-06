@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 143,
+            "activePatchIndex": 146,
             "patches": [
                 {
                     "date": 1651362513609,
@@ -580,6 +580,18 @@
                 {
                     "date": 1651766760007,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,12 @@\n /** @format */\n \n-import React, {useState, useEffect } from \"react\";\n+import React, { useState, useEffect } from \"react\";\n import \"antd/dist/antd.css\";\n import { Pagination } from \"antd\";\n import styled from \"styled-components\";\n import MovieItem from \"../../Components/MovieItem\";\n-import { Link, Outlet} from \"react-router-dom\";\n+import { Link, Outlet } from \"react-router-dom\";\n import { Swiper, SwiperSlide } from \"swiper/react\";\n import {\n   Navigation,\n   Pagination as Paginationn,\n@@ -81,11 +81,9 @@\n         maxIndex: page * pageSize,\n       };\n     });\n   };\n-  const handleClickItem = (id, keyid) => {\n-\n-  };\n+  const handleClickItem = (id, keyid) => {};\n   useEffect(() => {\n     const columns = () => {\n       if (window.innerWidth < 739) {\n         setColumn(1);\n@@ -105,14 +103,14 @@\n     return () => window.removeEventListener(\"resize\", columns);\n   }, []);\n   return (\n     <Container>\n-      <Outlet/>\n+      <Outlet />\n       {keyvalue.map((item, index) => {\n         const { key, title } = item;\n         return (\n           <div key={key}>\n-            <Outlet/>\n+            <Outlet />\n             <Title className='title'>{item.title}</Title>\n             <Swiper\n               spaceBetween={1}\n               modules={[Navigation, Paginationn, Autoplay, Scrollbar]}\n@@ -128,14 +126,14 @@\n                       index >= current.minIndex &&\n                       index < current.maxIndex && (\n                         <SwiperSlide key={index}>\n                           <Link to={`detail/${key}/${index}`}>\n-                          <MovieItem\n-                            onClick={handleClickItem}\n-                            item={item}\n-                            typemovie={title}\n-                            slide={true}\n-                          />\n+                            <MovieItem\n+                              onClick={handleClickItem}\n+                              item={item}\n+                              typemovie={title}\n+                              slide={true}\n+                            />\n                           </Link>\n                         </SwiperSlide>\n                       )\n                     );\n"
+                },
+                {
+                    "date": 1651795979282,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -65,9 +65,9 @@\n const HomePage = ({ data }) => {\n   const pageSize = 18;\n   const [column, setColumn] = useState(5);\n   const [current, setCurrent] = useState({\n-    data: data.phim,\n+    data: data & data.phim,\n     minIndex: 0,\n     maxIndex: pageSize,\n     current: 1,\n   });\n"
+                },
+                {
+                    "date": 1651796037712,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -65,9 +65,9 @@\n const HomePage = ({ data }) => {\n   const pageSize = 18;\n   const [column, setColumn] = useState(5);\n   const [current, setCurrent] = useState({\n-    data: data & data.phim,\n+    data: data.phim,\n     minIndex: 0,\n     maxIndex: pageSize,\n     current: 1,\n   });\n"
+                },
+                {
+                    "date": 1651797186470,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,8 +41,12 @@\n     width: 100%;\n     top: 100%;\n     background-color: #fff;\n   }\n+  @media only screen and (max-width: 735px) {\n+    font-size: 2.2rem;\n+    padding: 0 1rem;\n+  }\n `;\n const keyvalue = [\n   {\n     key: \"phimchieurap\",\n"
                 }
             ],
             "date": 1651362513609,

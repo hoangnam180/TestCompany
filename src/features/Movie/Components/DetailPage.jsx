@@ -19,6 +19,8 @@ const DetaiPageContainer = styled.div`
   }
   .title {
     color: white;
+    font-size: 2.5rem;
+    margin-top: 5px;
   }
   .wrap-title {
     display: flex;
@@ -155,6 +157,21 @@ const DetaiPageContainer = styled.div`
       background-image: unset;
     }
   }
+  @media only screen and (max-width: 1023px) {
+    .title {
+      font-size: 1.8rem;
+    }
+  }
+  @media only screen and (max-width: 723px) {
+    .title {
+      font-size: 1.1rem;
+      max-width: 80%;
+      text-align: center;
+    }
+    .episode {
+      padding: 2px;
+    }
+  }
 `;
 const DetaiPage = ({ data }) => {
   //get useParam on url get data id
@@ -164,14 +181,15 @@ const DetaiPage = ({ data }) => {
   const urldefault =
     movie && movie.episode && movie.episode.length > 0 && movie.episode[0]?.url;
   const [urlMovie, setUrlMovie] = useState(urldefault);
+  const width = window.innerWidth > 723 ? "710px" : "400px";
   return (
     <DetaiPageContainer>
       {movie && movie.episode && movie.episode.length > 0 ? (
         <div className='video'>
           <Iframe
             url={urlMovie}
-            height='400px'
-            width='710px'
+            height='350px'
+            width={width}
             className='myClassname'
             display='initial'
             frameBorder='0'
