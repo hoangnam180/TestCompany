@@ -7,12 +7,9 @@ import styled from "styled-components";
 import MovieItem from "../../Components/MovieItem";
 import { Link, Outlet } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import {
-  Navigation,
-  Pagination as Paginationn,
-  Autoplay,
-  Scrollbar,
-} from "swiper";
+import { useContext } from "react";
+import { UserContext } from "../../../../context/itemmovie-context";
+import { Navigation, Pagination as Paginationn, Autoplay } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -42,6 +39,12 @@ const Title = styled.h1`
     top: 100%;
     background-color: #fff;
   }
+  &.active {
+    color: #333;
+  }
+  &.active::before {
+    background-color: #bfbfbf;
+  }
   @media only screen and (max-width: 735px) {
     font-size: 2.2rem;
     padding: 0 1rem;
@@ -67,6 +70,7 @@ const keyvalue = [
 ];
 
 const HomePage = ({ data }) => {
+  const { type } = useContext(UserContext);
   const pageSize = 18;
   const [column, setColumn] = useState(5);
   const [current, setCurrent] = useState({
@@ -114,14 +118,17 @@ const HomePage = ({ data }) => {
         return (
           <div key={key}>
             <Outlet />
-            <Title className='title'>{item.title}</Title>
+            <Title className={`title ${type ? "active" : ""}`}>
+              {item.title}
+            </Title>
             <Swiper
               spaceBetween={1}
-              modules={[Navigation, Paginationn, Autoplay, Scrollbar]}
+              modules={[Navigation, Paginationn, Autoplay]}
               slidesPerView={column}
               navigation
               autoplay={{ delay: 3000 }}
-              scrollbar={{ draggable: true }}>
+              // scrollbar={{ draggable: true }}
+            >
               <MovieListContainer className='row'>
                 {current?.data &&
                   current?.data[key] &&

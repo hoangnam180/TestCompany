@@ -2,8 +2,8 @@
 
 import "./App.css";
 import Header from "./Components/header/Header";
-import { Routes, Route, useLocation } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { Spin } from "antd";
 import Footer from "./Components/footer/Footer";
@@ -12,9 +12,8 @@ import { publicRoutes } from "./routes";
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const { loadingPage, type } = useContext(UserContext);
   const [data, setData] = useState();
-  const { type } = useContext(UserContext);
-  let location = useLocation();
   useEffect(() => {
     setLoading(true);
     (async () => {
@@ -30,12 +29,12 @@ function App() {
       }
       setLoading(false);
     })();
-  }, [type, location.pathname]);
+  }, []);
 
   return (
-    <div className='App'>
+    <div className={`App ${type ? "active" : ""}`}>
       <Header />
-      {loading ? (
+      {loading || loadingPage ? (
         <div className='example'>
           <Spin />
         </div>
@@ -47,7 +46,7 @@ function App() {
               <Route
                 key={index}
                 path={route.path}
-                element={<Page data={data && data} />}
+                element={<Page data={data} />}
               />
             );
           })}

@@ -7,6 +7,7 @@ import Logo from "../../Assets/logo/popcorn.png";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { UserContext } from "../../context/itemmovie-context";
+import Switch from "../switch/Switch";
 const HeaderWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -48,7 +49,7 @@ const HeaderWrapper = styled.div`
     background-color: white;
     border-radius: 0.6rem;
     margin-left: 2rem;
-    width: 50%;
+    width: 40%;
     overflow: hidden;
     input {
       outline: none;
@@ -100,6 +101,15 @@ const Menu = styled.div`
     font-size: 2rem;
     padding: 5px;
     transition: all 0.25s linear;
+    &.light {
+      color: rgb(0 0 0 / 82%);
+    }
+    &.light:hover {
+      background-color: #00000042;
+    }
+    &.light.active {
+      background-color: #00000042;
+    }
     &.active {
       background-color: #eaeaea;
       color: #333;
@@ -132,7 +142,7 @@ const Menu = styled.div`
 
 const Header = props => {
   let navigate = useNavigate();
-  const { setType, setInputSearch } = useContext(UserContext);
+  const { setInputSearch, setType, type } = useContext(UserContext);
   const [input, setInput] = useState();
   //text Search
   const handleSearch = e => {
@@ -180,8 +190,9 @@ const Header = props => {
       name: "Phim lẻ",
     },
   ];
-  const handleClick = (id, item) => {
-    setType(item.path);
+  const handleClick = (id, item) => {};
+  const handleType = () => {
+    setType(!type);
   };
   return (
     <>
@@ -195,6 +206,9 @@ const Header = props => {
           <h1 className='header_title'>
             Home19<span className='header_title_inner'>film</span>
           </h1>
+        </div>
+        <div style={{ marginLeft: "auto", marginTop: "auto" }}>
+          <Switch onClick={handleType} />
         </div>
         <div className='header_searchbox'>
           <SearchOutlined onClick={onSearch} className='header_icon' />
@@ -215,7 +229,7 @@ const Header = props => {
                 <NavLink
                   to={item.path}
                   onClick={() => handleClick(index, item)}
-                  className={`navigation_link`}>
+                  className={`navigation_link ${type ? "light" : ""}`}>
                   {item.name}
                 </NavLink>
               </li>

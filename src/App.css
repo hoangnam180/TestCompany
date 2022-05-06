@@ -19,8 +19,15 @@ html body {
   line-height: 1.5;
   font-size: 1.5rem;
   font-family: "Josefin Sans", sans-serif;
+}
+html body .App {
   background: #000;
   color: #fff;
+}
+
+html body .App.active {
+  background: #fff;
+  color: #000;
 }
 
 h1,
