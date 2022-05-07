@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 11,
+            "activePatchIndex": 12,
             "patches": [
                 {
                     "date": 1651931643608,
@@ -52,6 +52,10 @@
                 {
                     "date": 1651939260419,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,10 +17,8 @@\n     \"styled-components\": \"^5.3.5\",\r\n     \"swiper\": \"^8.1.4\"\r\n   },\r\n   \"scripts\": {\r\n-    \"predeploy\" : \"npm run build\",\r\n-    \"deploy\":\"gh-pages -d build\",\r\n     \"start\": \"react-scripts start\",\r\n     \"build\": \"react-scripts build\",\r\n     \"test\": \"react-scripts test\",\r\n     \"eject\": \"react-scripts eject\"\r\n"
+                },
+                {
+                    "date": 1651939710608,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,8 +44,7 @@\n   \"devDependencies\": {\r\n     \"@babel/core\": \"^7.17.10\",\r\n     \"@babel/preset-env\": \"^7.17.10\",\r\n     \"babel-loader\": \"^8.2.5\",\r\n-    \"gh-pages\": \"^3.2.3\",\r\n     \"webpack\": \"^4.0.0\"\r\n   }\r\n }\r\n"
                 }
             ],
             "date": 1651931643608,
