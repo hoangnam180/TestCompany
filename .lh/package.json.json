@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 4,
+            "activePatchIndex": 9,
             "patches": [
                 {
                     "date": 1651931643608,
@@ -24,6 +24,26 @@
                 {
                     "date": 1651933516724,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,8 +18,10 @@\n     \"styled-components\": \"^5.3.5\",\r\n     \"swiper\": \"^8.1.4\"\r\n   },\r\n   \"scripts\": {\r\n+    \"predeploy\": \"npm run build\",\r\n+    \"deploy\": \"gh-pages -d build\",\r\n     \"start\": \"react-scripts start\",\r\n     \"build\": \"react-scripts build\",\r\n     \"test\": \"react-scripts test\",\r\n     \"eject\": \"react-scripts eject\"\r\n"
+                },
+                {
+                    "date": 1651933785762,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n {\r\n-  \"homepage\": \"https:// https://hoangnam180.github.io/Movie_App\",\r\n+  \"homepage\": \"https:// https://hoangnam180.github.io/Home19_movie\",\r\n   \"name\": \"movie_app\",\r\n   \"version\": \"0.1.0\",\r\n   \"private\": true,\r\n   \"dependencies\": {\r\n"
+                },
+                {
+                    "date": 1651933843507,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n {\r\n-  \"homepage\": \"https:// https://hoangnam180.github.io/Home19_movie\",\r\n+  \"homepage\": \"https:// https://hoangnam180.github.io/Home19_moviee\",\r\n   \"name\": \"movie_app\",\r\n   \"version\": \"0.1.0\",\r\n   \"private\": true,\r\n   \"dependencies\": {\r\n"
+                },
+                {
+                    "date": 1651933853772,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n {\r\n-  \"homepage\": \"https:// https://hoangnam180.github.io/Home19_moviee\",\r\n+  \"homepage\": \"https:// https://hoangnam180.github.io/Home19_movie\",\r\n   \"name\": \"movie_app\",\r\n   \"version\": \"0.1.0\",\r\n   \"private\": true,\r\n   \"dependencies\": {\r\n"
+                },
+                {
+                    "date": 1651933906228,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,14 +18,14 @@\n     \"styled-components\": \"^5.3.5\",\r\n     \"swiper\": \"^8.1.4\"\r\n   },\r\n   \"scripts\": {\r\n-    \"predeploy\": \"npm run build\",\r\n-    \"deploy\": \"gh-pages -d build\",\r\n     \"start\": \"react-scripts start\",\r\n     \"build\": \"react-scripts build\",\r\n     \"test\": \"react-scripts test\",\r\n-    \"eject\": \"react-scripts eject\"\r\n+    \"eject\": \"react-scripts eject\",\r\n+    \"predeploy\": \"npm run build\",\r\n+    \"deploy\": \"gh-pages -d build\"\r\n   },\r\n   \"eslintConfig\": {\r\n     \"extends\": [\r\n       \"react-app\",\r\n"
+                },
+                {
+                    "date": 1651933982556,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,11 +21,9 @@\n   \"scripts\": {\r\n     \"start\": \"react-scripts start\",\r\n     \"build\": \"react-scripts build\",\r\n     \"test\": \"react-scripts test\",\r\n-    \"eject\": \"react-scripts eject\",\r\n-    \"predeploy\": \"npm run build\",\r\n-    \"deploy\": \"gh-pages -d build\"\r\n+    \"eject\": \"react-scripts eject\"\r\n   },\r\n   \"eslintConfig\": {\r\n     \"extends\": [\r\n       \"react-app\",\r\n"
                 }
             ],
             "date": 1651931643608,
