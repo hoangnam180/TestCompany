@@ -170,7 +170,7 @@ const Header = props => {
   };
   const arrNav = [
     {
-      path: "/",
+      path: "/Home19_movie",
       name: "Trang chủ",
     },
     {
@@ -199,7 +199,7 @@ const Header = props => {
       <HeaderWrapper>
         <div
           onClick={() => {
-            navigate("/");
+            navigate("/Home19_movie");
           }}
           className='header_logobox'>
           <img className='header_logo' src={Logo} alt='logo' />
