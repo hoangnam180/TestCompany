@@ -1,7 +1,6 @@
 /** @format */
 
 import React, { useState, useEffect } from "react";
-import "antd/dist/antd.css";
 import { Pagination } from "antd";
 import styled from "styled-components";
 import MovieItem from "../../Components/MovieItem";
@@ -15,6 +14,8 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css/autoplay";
+import "antd/dist/antd.css";
+
 const MovieListContainer = styled.div`
   display: flex;
   flex-wrap: wrap;

@@ -14,6 +14,9 @@ const DetaiPageContainer = styled.div`
   align-items: center;
   margin: auto;
   min-height: 75vh;
+  &.light {
+    min-height: 50vh;
+  }
   .video {
     margin-top: 30px;
     text-align: center;
@@ -22,6 +25,9 @@ const DetaiPageContainer = styled.div`
     color: white;
     font-size: 2.5rem;
     margin-top: 5px;
+  }
+  .title.light {
+    color: #000;
   }
   .wrap-title {
     display: flex;
@@ -175,7 +181,7 @@ const DetaiPageContainer = styled.div`
   }
 `;
 const OthersMovie = ({ data }) => {
-  const { inputSearch } = useContext(UserContext);
+  const { inputSearch, type } = useContext(UserContext);
   const merge = () => {
     let datatemp = [];
     for (let property in data?.phim) {
@@ -201,7 +207,7 @@ const OthersMovie = ({ data }) => {
     movie && movie.episode && movie.episode.length > 0 && movie.episode[0]?.url;
   const [urlMovie, setUrlMovie] = useState(urldefault);
   return (
-    <DetaiPageContainer>
+    <DetaiPageContainer className={`${type ? "light" : ""}`}>
       {movie && movie.episode && movie.episode.length > 0 ? (
         <div className='video'>
           <Iframe
@@ -217,7 +223,7 @@ const OthersMovie = ({ data }) => {
           />
           <div className='wrap-title'>
             {/* <h1 className='title'>{movie.category} : </h1> */}
-            <h1 className='title'> {movie.title}</h1>
+            <h1 className={`title ${type ? "light" : ""}`}> {movie.title}</h1>
           </div>
           <div className='episode-list'>
             {movie.episode.map((episode, index) => (

@@ -1,7 +1,8 @@
 /** @format */
 
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { UserContext } from "../../../context/itemmovie-context";
 const MovieItemContainer = styled.div`
   .inneritem {
     display: flex;
@@ -27,6 +28,9 @@ const MovieItemContainer = styled.div`
     overflow: hidden;
     margin-bottom: 5px;
   }
+  .movie_item_title.light {
+    color: #000;
+  }
   .movie_item_info {
     display: flex;
     flex-direction: column;
@@ -37,19 +41,27 @@ const MovieItemContainer = styled.div`
     color: #fff;
     text-transform: capitalize;
   }
+  .movie_item_info.light span {
+    color: #000;
+  }
 `;
 
-const MovieItem = ({ item, typemovie, onClick, id, keyid ,slide}) => {
+const MovieItem = ({ item, typemovie, onClick, id, keyid, slide }) => {
+  const { type } = useContext(UserContext);
   return (
     <MovieItemContainer
       onClick={() => {
         onClick(id, keyid);
       }}
-      className={slide ? 'col c-12 m-12 lm-12 l-2-12' : 'col c-12 m-4 lm-3 l-2-4'}>
+      className={
+        slide ? "col c-12 m-12 lm-12 l-2-12" : "col c-12 m-4 lm-3 l-2-4"
+      }>
       <li className='inneritem'>
         <img className='movie_item_img' src={item.imageUrl} alt='poster' />
-        <h4 className='movie_item_title'>{item.title}</h4>
-        <div className='movie_item_info'>
+        <h4 className={`movie_item_title ${type ? "light" : ""}`}>
+          {item.title}
+        </h4>
+        <div className={`movie_item_info ${type ? "light" : ""}`}>
           <span>Loại Phim: {typemovie}</span>
           <span>Thể Loại: {item.category}</span>
         </div>

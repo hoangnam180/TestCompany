@@ -1,10 +1,11 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import Iframe from "react-iframe";
 import { Empty } from "antd";
 import { useParams } from "react-router-dom";
+import { UserContext } from "../../../context/itemmovie-context";
 
 const DetaiPageContainer = styled.div`
   display: flex;
@@ -13,6 +14,9 @@ const DetaiPageContainer = styled.div`
   align-items: center;
   margin: auto;
   min-height: 75vh;
+  &.light {
+    min-height: 50vh;
+  }
   .video {
     margin-top: 30px;
     text-align: center;
@@ -21,6 +25,9 @@ const DetaiPageContainer = styled.div`
     color: white;
     font-size: 2.5rem;
     margin-top: 5px;
+  }
+  .title.light {
+    color: #000;
   }
   .wrap-title {
     display: flex;
@@ -174,6 +181,8 @@ const DetaiPageContainer = styled.div`
   }
 `;
 const DetaiPage = ({ data }) => {
+  const { type } = useContext(UserContext);
+
   //get useParam on url get data id
   const params = useParams();
   const id = params && Number.parseInt(params.detailId);
@@ -183,7 +192,7 @@ const DetaiPage = ({ data }) => {
   const [urlMovie, setUrlMovie] = useState(urldefault);
   const width = window.innerWidth > 723 ? "710px" : "400px";
   return (
-    <DetaiPageContainer>
+    <DetaiPageContainer className={`${type ? "light" : ""}`}>
       {movie && movie.episode && movie.episode.length > 0 ? (
         <div className='video'>
           <Iframe
@@ -199,7 +208,7 @@ const DetaiPage = ({ data }) => {
           />
           <div className='wrap-title'>
             {/* <h1 className='title'>{movie.category} : </h1> */}
-            <h1 className='title'> {movie.title}</h1>
+            <h1 className={`title ${type ? "light" : ""}`}> {movie.title}</h1>
           </div>
           <div className='episode-list'>
             {movie.episode.map((episode, index) => (
