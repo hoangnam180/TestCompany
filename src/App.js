@@ -1,41 +1,16 @@
-/** @format */
-
 import "./App.css";
-import Header from "./Components/header/Header";
-import { Routes, Route } from "react-router-dom";
-import { useEffect, useState, useContext } from "react";
-import axios from "axios";
-import { Spin } from "antd";
-import Footer from "./Components/footer/Footer";
-import { UserContext } from "./context/itemmovie-context";
-import { publicRoutes } from "./routes";
+import LayoutDefault from "./features/SamMarket/components/LayoutDefault";
+import ProductDetail from "./features/SamMarket/Page/DetailProduct";
 
 function App() {
-  const [loading, setLoading] = useState(true);
-  const { loadingPage, type } = useContext(UserContext);
-  const [data, setData] = useState();
-  useEffect(() => {
-    setLoading(true);
-    (async () => {
-      try {
-        const respon = await axios.get(
-          "https://api.apify.com/v2/key-value-stores/QubTry45OOCkTyohU/records/LATEST?fbclid=IwAR0nJYHjOqJY60a9OJKatwQ8iBP9p6zyTPB9-mfjyLSa5TJGbalHhODluXw",
-        );
-        const { data } = await respon;
-        setData(data);
-        console.log("renderapp", data);
-      } catch (error) {
-        console.log("Fail to get products", error);
-      }
-      setLoading(false);
-    })();
-  }, []);
-
   return (
-    <div className={`App ${type ? "active" : ""}`}>
-      <Header />
+    <div className={`App`}>
+      <LayoutDefault>
+        <ProductDetail />
+      </LayoutDefault>
+      {/* <Header />
       {loading || loadingPage ? (
-        <div className='example'>
+        <div className="example">
           <Spin />
         </div>
       ) : (
@@ -50,32 +25,9 @@ function App() {
               />
             );
           })}
-          {/* <Route path='/' element={<Home data={data && data} />} />
-          <Route
-            path='/phimbo/*'
-            element={<SeriesMovie data={data && data} />}
-          />
-          <Route
-            path='/phimchieurap/*'
-            element={<MovieTheaters data={data && data} />}
-          />
-          <Route
-            path='/phimhoathinh/*'
-            element={<Cartoon data={data && data} />}
-          />
-          <Route path='/phimle/*' element={<OddMovie data={data && data} />} />
-          <Route
-            path='/detail/:key/:detailId'
-            element={<DetailPage data={data && data} />}
-          />
-          <Route path='/search' element={<Search data={data && data} />} />
-          <Route
-            path='/search/:id'
-            element={<OthersMovie data={data && data} />}
-          /> */}
         </Routes>
       )}
-      <Footer />
+      <Footer /> */}
     </div>
   );
 }

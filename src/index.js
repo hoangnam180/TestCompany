@@ -4,15 +4,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-import WrapperProvider from "./context/itemmovie-context";
 
-const rootNode = document.getElementById('root');
+const rootNode = document.getElementById("root");
 ReactDOM.render(
-<React.StrictMode> 
-  <BrowserRouter>
-    <WrapperProvider>
+  <React.StrictMode>
+    <BrowserRouter>
       <App />
-    </WrapperProvider>
-  </BrowserRouter>
-</React.StrictMode>, rootNode);
-
+    </BrowserRouter>
+  </React.StrictMode>,
+  rootNode
+);
